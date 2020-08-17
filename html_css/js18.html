@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function func(){
+            // checkbox의 갯수를 알아보기
+            // alert(document.getElementsByName('chk').length);
+
+            // namedl 'chk'인 요소의 값을 가져오기
+            // let len = document.getElementsByName('chk').length;
+            // for(let i =0; i < len; i ++){
+            //     alert(document.getElementsByName('chk')[i].value);
+            // }
+
+            // 'chk' 중에 특정한 요소를 체크해주기
+            // document.getElementsByName('chk')[1].checked = true;
+            
+            // 체크된 것만 가져오기
+            let len = document.getElementsByName('chk').length;
+            for(let i = 0; i < len; i++){
+                if(document.getElementsByName('chk')[1].checked == true){
+                    console.log(document.getElementsByName('chk')[i].value);
+                }
+            }
+            
+
+
+
+        }
+    </script>
+</head>
+<body>
+    <input type="button" onclick="func()" value="클릭"><br/>
+    <input type="checkbox" name="chk" value="독서" checked>독서<br/>
+    <input type="checkbox" name="chk" value="운동">운동<br/>
+    <input type="checkbox" name="chk" value="영화감상">영화감상<br/>
+    <input type="checkbox" name="chk" value="여행" checked>여행<br/>
+    <input type="checkbox" name="chk" value="기타">기타<br/>
+</body>
+</html>
