@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function func() {
+            // checkbox의 갯수를 알아보기
+            chk_count = 0;
+            chks = document.getElementsByName('chk');
+            for(let chk of chks) {
+                if (chk.checked) {
+                    chk_count++;
+                }
+            }
+            alert(chk_count);
+        }
+
+    </script>
+</head>
+<body>
+    <input type="button" onclick="func()" value='클릭'> <br/>
+    <input type="checkbox" name="chk" value="val1">독서<br/>
+    <input type="checkbox" name="chk" value="val2">운동<br/>
+    <input type="checkbox" name="chk" value="val3">영화감상<br/>
+    <input type="checkbox" name="chk" value="val4">여행<br/>
+    <input type="checkbox" name="chk" value="val5">게임<br/>
+</body>
+</html>

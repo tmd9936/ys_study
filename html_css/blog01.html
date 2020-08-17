@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>블로그</title>
+    <style>
+        * {
+            margin:0;
+            padding:0;
+        }
+          
+        html {
+            background: #eed;
+        }
+
+        body {
+            width: 1000px;
+            margin: 10px auto;
+            background: #fff;
+
+        }
+
+        .subject {
+            margin: 50px 0px 30px 20px;
+        }
+          
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        header {
+            background: white;
+            height: 190px;
+        }
+
+        header::after {
+            content: '';
+            clear: both;
+            display: block;
+
+        }
+
+        .space1 {
+            height: 1px;
+            width: 100%;
+        }
+
+        .space2 {
+            height: 30px;
+            width: 100%;
+        }
+          
+        header nav ul li {
+            float: left;
+            list-style: none;
+            margin-left: 20px;
+            line-height: 40px;
+        }
+        
+
+        header nav ul li:last-child {
+            margin-left: 525px;
+        }
+
+        header nav ul li a:hover {
+            background: #ccc;
+            color: white;
+        }
+        
+        header nav ul li button {
+            margin-left: 0px;
+            border-top-right-radius: 30%;
+            border-bottom-right-radius: 30%;
+            border: 1px solid #eee;
+        }
+
+        hr {
+            margin: 0 20px 0 20px;
+        }
+        
+        .search_btn {
+            font-size: 0.4em;
+            width: 30px;
+            height: 20px;
+            
+        }
+
+        main aside h6 {
+            margin-left: 30px;
+        }
+
+        main aside h6 {
+            margin-left: 30px;
+        }
+
+        section {
+            
+            margin: 10px 10px 10px 20px;
+            width: 720px;
+            margin-top: 60px;
+        }
+
+        .time {
+            font-size: 0.6em;
+            line-height: 35px;
+        }
+
+        main {
+            display: flex;
+            height: auto;
+        }
+
+        aside {
+            width: 100px;
+            
+            margin: 50px 10px 10px 0px;
+        }
+
+        footer {
+            background: gray;
+            
+        }
+
+        input[type=text] {
+            border : 2px solid #eed;
+            border-radius : 5px;
+        }
+
+
+
+    </style>
+</head>
+<body>
+  <header>
+    <div class="space1">
+    </div>
+    <div class="subject">
+        <h1>HTML5 Example Preview</h2>
+        <p>Web School</p>
+    </div>
+    <hr>
+    <nav>
+      <ul>
+        <li><a href="./demo01.html">HTML5</a></li>
+        <li><a href="./demo02.html">CSS</a></li>
+        <li><a href="./demo03.html">JavaScript</a></li>
+        <li>
+            <input type="text" name="search" id="search">
+            <button type="submit" class="search_btn">검색</button>
+        </li>
+      </ul>
+    </nav>
+</header>
+<hr>
+  <main>
+    <section>
+      <h2>HTML5 개요와 활용</h2>
+      <article>
+        <p class="time">2020년 7월 29일</p>
+      </article>
+      <img src="https://loremflickr.com/400/400?random=2" alt="">
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+Why do we use it?
+It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+
+
+    </section>
+    <aside>
+      <h3>카테고리1</h3>
+      <h6>서브젝트1</h6>
+      <h6>서브젝트2</h6>
+      <h6>서브젝트3</h6>
+      <h6>서브젝트4</h6>
+      <h6>서브젝트5</h6>
+      <div class="space2"></div>
+
+      <h3>카테고리2</h3>
+      <h6>서브젝트1</h6>
+      <h6>서브젝트2</h6>
+      <h6>서브젝트3</h6>
+      <h6>서브젝트4</h6>
+      <h6>서브젝트5</h6>
+      
+    </aside>
+  </main>  
+
+  <footer>
+    <address>
+      <a href="mailto:test@gmail.com">이메일</a>
+    </address>
+  </footer>
+</body>
+</html>

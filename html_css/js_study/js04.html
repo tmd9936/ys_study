@@ -1,0 +1,20 @@
+<script>
+    let cost1 = prompt('교통비');
+    let cost2 = prompt('음료비');
+    let cost3 = prompt('식사비');
+
+    let total = parseInt(cost1) + parseInt(cost2) + parseInt(cost3);
+
+    let msg = total > 20000 ? total - 20000 + '원 초과':'OK';
+
+    console.log(msg)
+
+    // Number vs. parseInt
+
+    // Number : 문자형 숫자를 숫자로 변환
+    // parseInt : 문자형 숫자를 숫자로 변환 시켜주나 Number와는 달리
+    //            숫자가 아닌 부분이 나올 때까지 변환함.
+
+    console.log(Number('1212aa')) // NaN : Not a Number
+    console.log(parseInt('1212aa')) // 1212
+</script>

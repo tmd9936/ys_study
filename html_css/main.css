@@ -1,0 +1,16 @@
+div
+{
+    color: yellow;
+    background-color: black;
+}
+
+.test, .test2
+{
+    background: yellowgreen;
+}
+
+
+#litest 
+{
+    background:red;
+}

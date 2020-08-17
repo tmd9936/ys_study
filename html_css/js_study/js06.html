@@ -1,0 +1,22 @@
+<script>
+    const db_id = 'test1234';
+    const db_pw = '1234';
+
+    // 방문자에게 아이디를 입력받는다.
+    let user_id = prompt('아이디를 입력하세요?');
+    console.log(user_id);
+    //방문자에게 비밀번호를 입력 받는다.
+    let user_pw = prompt('비밀번호를 입력하세요');
+
+    if (user_id == db_id && user_pw == db_pw) {
+        document.write('<hr>');
+        document.write(user_id + '님 환영합니다.');
+        document.write('<hr>');
+    } else {
+        document.write('비밀번호와 아이디를 다시 확인하세요.');
+        
+        location.reload(); // 페이지 리로드
+    }
+
+
+</script>

@@ -1,0 +1,70 @@
+<script>
+    // 기본 조건문
+    const n = 1;
+    // 참된 경우만 실행
+    if (n + 1 === 2){
+        console.log('n + 1 은 2입니다.');
+    }
+
+    const ii = 1;
+    if(true){
+        const ii =2;
+        console.log('if 안의 ii값은'+ii);
+    }
+
+    console.log('if밖의 ii값은 '+ii);
+
+    // if ~else문
+    const bb = 10;
+    if(bb > 20) {
+        console.log('bb다 20보다 큽니다.');
+    } else {
+        console.log('bb가 20보다 작습니다.');
+    }
+
+    // if ~ else if 문
+    // 여러 조건에 따라서 다른 작업을 할 떄
+    const dd = 77;
+    if(dd === 55){
+        console.log('55 입니다.');
+    } else if (dd == 66){
+        console.log('66입니다.');
+    } else {
+        console.log('55도 66도 아닙니다.');
+    }
+
+    // switch문
+    // 주어진 값에 따라 작업을 하고자 할 때
+    const handphone = 'iphone';
+
+    switch(handphone){
+        case 'galaxy':
+            console.log('삼성');
+            break;
+        case 'iphone':
+            console.log('애플');
+            break;
+        case 'v6':
+            console.log('LG');
+            break;
+        default:
+            console.log('????');
+
+    }
+
+    let userId = prompt('당신의 아이디?');
+
+    // 아이디값이 있을 경우만 명령 수행
+    if(userId){
+        document.write(userId+'님 안녕하세요!!');
+    }
+
+    let result = confirm('회원 탈퇴 할래?');
+    console.log('result : ' + result);
+
+    if(result) {
+        document.write('탈퇴 완료');
+    } else {
+        document.write('탈퇴 취소');
+    }
+</script>
