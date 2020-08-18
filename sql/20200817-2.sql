@@ -27,6 +27,9 @@
     delete from 테이블명
     where 조건;
     
+    -- 실행 순서
+    FROM - WHERE - GROUP BY - HAVING - SELECT - ORDER BY
+    
 */
 
 -- 문제 sample 테이블을 알래 컬럼 구조로 만드세요.

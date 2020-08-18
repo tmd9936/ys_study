@@ -185,19 +185,27 @@ create table student(
 -- check 제약조건을 이용한 나이의 유효성 검사
 alter table student
 add constraint age_chk
-check(round((regdate - birthday)/365) + 1 = age or round((regdate - birthday)/365) + 2 = age );
+check(round((regdate - birthday)/365) = age);
+-- check(round((regdate - birthday)/365) + 1 = age or round((regdate - birthday)/365) + 2 = age );
+
+alter table student
+add (subject varchar2(20));
+
+alter table student
+modify(subject varchar(30));
 
 insert into student
 values(
     100,
     'ss',
-    28,
+    26,
     '19931002',
     sysdate
 );
 
 
-
+select * from student;
+truncate table student;
 
 
 
