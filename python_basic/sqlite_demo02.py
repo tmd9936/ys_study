@@ -66,5 +66,17 @@ c.execute("SELECT * FROM users WHERE id=:id1 OR id=:id2",{'id1':2 , 'id2':5})
 print('param6 :', c.fetchall())
 
 
-c.close()
-conn.close()
+# Dump 출력
+with conn:
+    with open('./resource/dump.sql', 'w') as f:
+        for line in conn.iterdump():
+            f.write('%s\n' % line)
+        print('Dump 완성!!')
+
+
+
+
+
+
+
+# conn.close()
