@@ -19,7 +19,7 @@ def get_all_student_info_view():
 
 def get_one_student_info_view():
     ids = input('학번 검색 : ')
-    if ids == 'X':
+    if ids.upper() == 'X':
         return None
     std_info = stdcon.get_one_student_info(ids)
     return std_info
