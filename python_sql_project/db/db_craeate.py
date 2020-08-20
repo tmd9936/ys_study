@@ -21,3 +21,16 @@ cur.execute("CREATE TABLE IF NOT EXISTS student( \
                 db_grade INTEGER, \
                 CONSTRAINT ids_fk FOREIGN KEY(ids) \
                     REFERENCES student_info(ids))")
+
+
+cur.execute("CREATE VIEW student_info_grade\
+            AS\
+            SELECT info.ids, \
+                   info.name, \
+                   info.tel, \
+                   info.address, \
+                   std.os_grade, \
+                   std.cv_grade, \
+                   std.db_grade \
+            FROM student_info info\
+                LEFT JOIN student std USING(ids)")

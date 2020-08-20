@@ -21,9 +21,9 @@ def get_all():
         cur = conn.cursor()
         cur.execute("SELECT std.ids, \
                             info.name,\
-                            std.os_grade,\
-                            std.cv_grade,\
-                            std.db_grade\
+                            IFNULL(std.os_grade, 0),\
+                            IFNULL(std.cv_grade, 0),\
+                            IFNULL(std.db_grade, 0)\
                     FROM student std, student_info info \
                     WHERE std.ids = info.ids")
         
@@ -48,9 +48,9 @@ def get_one(ids):
     with sqlite3.connect(consts.DB_PATH) as conn:
         cur = conn.cursor()
         cur.execute("SELECT ids, \
-                            os_grade,\
-                            cv_grade,\
-                            db_grade \
+                            IFNULL(os_grade, 0),\
+                            IFNULL(cv_grade,0),\
+                            IFNULL(db_grade,0) \
                     FROM student \
                     WHERE ids = ?",(ids,))
         

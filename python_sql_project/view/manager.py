@@ -1,6 +1,7 @@
 import view.student_info_view as std_info_view
 import view.student_view as std_view
 import common.consts as consts
+import controller.student_controller as std_con
 
 
 def menu():
@@ -48,6 +49,7 @@ def menu():
 def student_create_view_manager():  
     while True:      
         std_info_one = std_info_view.get_one_student_info_view()
+        
         if std_info_one == None:
             break
         if not std_info_one.get('result'):
@@ -55,9 +57,12 @@ def student_create_view_manager():
             continue
         else:
             std_info = std_info_one.get('std_info')
-            print(std_info)
-
             if std_info.is_grade == consts.IS_GRADE_TRUE:
+                std = std_con.get_one_student(std_info.ids)
+                print('--------------------------------------------------')
+                print('학번 운영체제 컴퓨터비전 데이터베이스 ')
+                print('--------------------------------------------------')
+                print(std)
                 continue
             else:
                 std_view.create_student_view(std_info.ids)
@@ -73,7 +78,7 @@ def student_view_manager(num):
             continue
         else:
             print('--------------------------------------------------')
-            print('학번  이름  운영체제 컴퓨터비전 데이터베이스 ')
+            print('학번 운영체제 컴퓨터비전 데이터베이스 ')
             print('--------------------------------------------------')
             print(std_one)
             if num == consts.UPDATE_STUDENT_COMMAND:
@@ -84,8 +89,3 @@ def student_view_manager(num):
                 inp = input('위의 학생의 성적을 삭제 하시겠습니까? (삭제:Y, 넘기기: 다른 아무키) ')
                 if inp.upper() == 'Y':
                     result = std_view.delete_student_view(std_one.ids)
-
-                
-
-            
-        

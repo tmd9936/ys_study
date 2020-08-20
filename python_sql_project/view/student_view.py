@@ -1,9 +1,10 @@
 import controller.student_controller as std_con
 
 def create_student_view(ids):
-    os_grade = input('운영체제 : ')
-    cv_grade = input('컴퓨터비전 : ')
-    db_grade = input('데이터베이스 : ')
+    os_grade = space_proccess(input('운영체제 : ').rstrip())
+    cv_grade = space_proccess(input('컴퓨터 비전 : ').rstrip())
+    db_grade = space_proccess(input('데이터베이스 : ').rstrip())
+
 
     result = std_con.create_student(ids, os_grade, cv_grade, db_grade)
 
@@ -38,9 +39,9 @@ def get_one_student_view():
     return result
 
 def update_student_view(ids):
-    os_grade = input('운영체제 : ')
-    cv_grade = input('컴퓨터 비전 : ')
-    db_grade = input('데이터베이스 : ')
+    os_grade = space_proccess(input('운영체제 : ').rstrip())
+    cv_grade = space_proccess(input('컴퓨터 비전 : ').rstrip())
+    db_grade = space_proccess(input('데이터베이스 : ').rstrip())
 
     result = std_con.update_student(ids, os_grade, cv_grade, db_grade)
     if result == '0':
@@ -54,3 +55,12 @@ def delete_student_view(ids):
         print('정상석으로 처리가 되지 않았습니다.')
     else:
         print('정상적으로 처리가 되었습니다.')
+
+def space_proccess(string):
+    print("확인 : ",string)
+    if string == '' or  string == ' ' or string == '\n' or string == '\r' or string == None:
+        return '0'
+    else:
+        return string
+
+
