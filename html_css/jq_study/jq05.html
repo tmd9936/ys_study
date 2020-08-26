@@ -1,0 +1,22 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('em').addClass('sel');
+        $('#myid').addClass('highlight');
+        
+    });
+</script>
+<style>
+    .sel {
+        color: tomato
+    }
+    
+    .highlight {
+        background: yellowgreen;
+    }
+</style>
+<div>
+    <em title="Italic display">제이쿼리 스터디</em>
+    <p id="myid">문단</p>
+</div>

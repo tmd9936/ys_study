@@ -1,0 +1,56 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+/*
+    :first - (첫 번째 요소)
+    :last - (마지막 요소)
+    :even - (짝수번째 요수)
+    :odd - (홀수번째 요소)
+    :eq(index) - index에 해당하는 요소
+    :gt(index) - index보다 큰 요소
+    :lt(index) = index보다 작은 요소
+    :has(selector) - selector 요소를 하나이강 포함하고 있는 요소
+    :not(selector) - selector와 일치하지 않는 모든 요소
+
+
+*/
+    $(document).ready(function() {
+        // eq : 인덱스로 선택
+        // $('li').eq(2).addClass('sel');
+        
+        // li안에 있는 middle클래스를 필터링
+        // $('li').filter('.middle').addClass('sel');
+
+        // 직접 스타일 적용
+        // $('li').eq(2).css('color','skyblue');
+
+        // 복수개의 스타일을 직접 적용
+        // $('li').eq(3).css({'color':'blue', 'background':'orange'});
+        
+
+        // $('.middle').addClass('sel');
+        // $('li').last().addClass('last');
+        $('li').css('border','1px solid red');
+
+    });
+</script>
+
+<style>
+    .sel {
+        color: tomato;
+    }
+    .last {
+        border: 1px solid red;
+        
+    }
+</style>
+<!-- div>ul>li{리스트항목 $}*6 -->
+<div>
+    <ul>
+        <li class="top">리스트항목 1</li>
+        <li class="top">리스트항목 2</li>
+        <li class="middle">리스트항목 3</li>
+        <li class="middle">리스트항목 4</li>
+        <li class="bottom">리스트항목 5</li>
+        <li class="bottom">리스트항목 6</li>
+    </ul>
+</div>

@@ -3,7 +3,12 @@ from model.student_info import Student_Info
 
 def create_student_info(ids, name, tel, address):
     std_info = Student_Info(ids,name,tel,address)
-    s_info_svc.create(std_info)
+    try:
+        s_info_svc.create(std_info)
+    except:
+        return False
+    else:
+        return True
 
 
 def get_all_student_info():

@@ -6,8 +6,11 @@ def create_student_info_view():
     tel = input('전화 번호 : ')
     address = input('주소 : ')
     
-    stdcon.create_student_info(ids, name, tel, address)
-    print('입력완료!')
+    result = stdcon.create_student_info(ids, name, tel, address)
+    if result:
+        print('입력완료!')
+    else:
+        print('입력실패!')
 
 def get_all_student_info_view():
     std_infos = stdcon.get_all_student_info()

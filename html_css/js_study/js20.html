@@ -1,0 +1,63 @@
+<!-- 
+    키 이벤트
+    onKeyDown : 키를 눌렀을 때 이벤트 발생
+    onKeyUp : 키를 누르고 땠을 때 이벤트 발생
+
+    onKeyPress : onKeyDown과 같으나 리턴값이 ASCII 코드값
+    * ASCII 코드값 shift, ctrl, backspace, tab, 한/영 등의 키를 인식하지 못함.
+ -->
+<script>
+    function keyevent() {
+        let keycode = event.keyCode;
+        console.log(keycode);
+    }
+
+    function chk_len_chr(arg) {
+        let char_len = arg.value.length;
+        let remain = 100 - char_len;
+        document.getElementById('r_chr_num').innerHTML = remain;
+    }
+</script>
+
+ <label for="">
+    <input type="text" name="" id="" onkeydown="keyevent()">
+
+ </label>
+
+ <label for="">
+    <input type="text" name="" id="" onkeyup="keyevent()">
+
+ </label>
+ 
+ <label for="">
+    <input type="text" name="" id="" onkeypress="keyevent()">
+
+ </label>
+<br>
+<br>
+
+<textarea onkeyup="chk_len_chr(this)" cols="30" rows="5"></textarea>
+남은 글자수 : <span id="r_chr_num">100</span>
+<br><br>
+<!-- <input type="text" id="name" placeholder="이름을 입력하세요"> -->
+<input type="text" id="name" value="이름을 입력하세요">
+
+<!-- focus이벤트 -->
+<script type="text/javascript">
+    let name = document.getElementById('name');
+    name.addEventListener('focus', function(event){
+        if(name.value == "이름을 입력하세요") {
+            name.value = '';
+        }
+    });
+    
+</script>
+
+<!-- blur이벤트 -->
+<script>
+    name.addEventListener('blur', function(event){
+        if(name.value == '') {
+            name.value = '이름을 입력하세요';
+        }
+    });
+</script>

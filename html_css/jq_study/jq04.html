@@ -1,0 +1,20 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        let title = $('em').attr('title');
+        let div1 = $('#divid').text();
+        // alert(div1);
+        let jqs = $('em').text();
+        $('#divid').text(title);
+        $('#myid').text(jqs);
+    });
+
+</script>
+
+
+<div>
+    <em title="Bold display">제이쿼리 스터디</em>   <br/>
+    <!-- <em title2="Bold display2">제이쿼리 스터디</em> -->
+    <p id="myid">문단</p>
+    <div id="divid">안녕</div>
+</div>
