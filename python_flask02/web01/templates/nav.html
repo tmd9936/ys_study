@@ -5,10 +5,10 @@
         </div>
         <ul class="nav navbar-nav">
             <!-- (li>a{메뉴 $})*4 -->
-            <li class="active"><a href="#">메뉴 1</a></li>
-            <li><a href="#">메뉴 2</a></li>
-            <li><a href="#">메뉴 3</a></li>
-            <li><a href="#">메뉴 4</a></li>
+            <li class="active"><a href="{{url_for('home')}}">Home</a></li>
+            <li><a href="{{url_for('about')}}">회사소개</a></li>
+            <li><a href="{{url_for('contact')}}">오시는길</a></li>
+            <li><a href="{{url_for('helpdesk')}}">Help</a></li>
         </ul>
         <form action="" class="navbar-form navbar-left" role="search">
             <div class="form-group">
