@@ -1,0 +1,29 @@
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="container-fuid">
+        <div class="navbar-header">
+            <a href="" class="navbar-brand" href="/">LOGO</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="{{url_for('boards.list')}}">게시판</a></li>
+            <li><a href="#">Help</a></li>
+            <li><p> </p></li>
+            <li><p> </p></li>
+            <li><p> </p></li>
+        </ul>
+        <form action="" class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+                <input type="text" name="search" class="form-control" placeholder="검색" id="">
+            </div>
+            <button type="submit" class="btn btn-default">확인</button>
+        </form>
+        <ul class="nav navbar-nav">
+            {% if session['name'] %}
+                <li><a href="{{url_for('users.logout')}}">로그아웃</a></li>
+            {% else %}
+                <li><a href="{{url_for('users.member_join')}}">회원가입</a></li>         
+                <li><a href="{{url_for('users.member_login')}}">로그인</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>

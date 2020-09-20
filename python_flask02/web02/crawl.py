@@ -5,14 +5,14 @@ from pymongo import MongoClient
 from datetime import datetime
 
 client = MongoClient(host="localhost", port=27017)
-db = client.myweb
+db = client.webproj
 col = db.board
 
 header = {"user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36"}
 
 
 for i in range(2):
-    url =  "https://www.google.com/search?q={}&start={}".format("c언어",i*10)
+    url =  "https://www.google.com/search?q={}&start={}".format("대학교",i*10)
 
 
     res = requests.get(url, headers = header)
@@ -27,7 +27,7 @@ for i in range(2):
             title = li.select_one("h3.LC20lb").text
             contents = li.select_one("div.s").text
             col.insert_one({
-                "name"  : "고말똥",
+                "name"  : "고강수",
                 "title" : title,
                 "contents" : contents,
                 "hit" : 0,

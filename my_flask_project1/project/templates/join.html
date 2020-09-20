@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <script>
+                alert("{{messages[-1]}}"); // 리스트의 맨마지막 값이 message
+            </script>
+        {% endif %}
+    {% endwith %}
+    <link rel="stylesheet" href="/project/static/css/common.css">
+    <h3>회원가입</h3>
+
+    <form action="/join" method="POST" name="form">
+        <ul>
+            <li>이름</li>
+            <li><input type="text" name="name" ></li>
+            <li>이메일</li>
+            <li><input type="email" name="email"></li>
+            <li>비밀번호</li>
+            <li><input type="password" name="pw" ></li>
+            <li>비밀번호 확인</li>
+            <li><input type="password" name="pw2" ></li>
+            <p></p>
+            <li><input type="submit" value="회원가입"></li>
+        </ul>
+        
+    </form>
+{% endblock content %}
