@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <script>
+                alert("{{messages[-1]}}");
+            </script>
+        {% endif %}
+    {% endwith %}
+    <h3>로그인</h3>
+
+    <div class="login-form">
+        <form action="/login" method="POST" name="form">
+            {% if next_url %}
+                <input type="hidden" name="next_url" value={{next_url}}>
+            {% endif %}
+            <ul>
+                <li>이메일</li>
+                <li><input type="text" name="email"></li>
+                <li>비밀번호</li>
+                <li><input type="password" name="pw"></li>
+                <li><input type="submit" value="로그인"></li>
+            </ul>
+        </form>
+    </div>
+{% endblock content %}

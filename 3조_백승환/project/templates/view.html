@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+    <h3>게시글 상세보기</h3>
+
+    {{result.title}}<br>
+    {{result.name}}<br>
+    {{result.regdate | datetime_format}}<br>
+    {{result.contents}}<br>
+    {{result.hit}}<br>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <script>
+                alert("{{messages[-1]}}"); // 리스트의 맨마지막 값이 message
+            </script>
+        {% endif %}
+    {% endwith %}
+
+    <p></p>
+    <p>
+        <a href="{{url_for('boards.list', keyword=keyword, search=search, page=page)}}">리스트</a>
+    </p>
+    {% if session['id'] == result.writer_id %}
+        <a href="{{url_for('boards.board_modify', idx=result.id)}}">글수정</a>
+        <a href="{{url_for('boards.board_delete', idx=result.id)}}">글삭제</a>
+    {% endif %}
+
+{% endblock content %}
