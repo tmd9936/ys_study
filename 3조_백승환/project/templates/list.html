@@ -7,9 +7,9 @@
             keyword_val = document.getElementById("keyword").value;
 
             if(keyword == "") {
-                location.href = "{{url_for('boards.list')}}?search="+0+"&keyword=";
+                location.href = "{{url_for('board.list')}}?search="+0+"&keyword=";
             } else  {
-                location.href = "{{url_for('boards.list')}}?search="+search_val+"&keyword="+keyword_val;
+                location.href = "{{url_for('board.list')}}?search="+search_val+"&keyword="+keyword_val;
             }
 
         }
@@ -23,19 +23,19 @@
     {% endwith %}
 
     {% if docs.count()  > 0 %}
-        <table border="1">
+        <table class="table table-striped">
             <thead>
-                <td>번호</td>
-                <td>제목</td>
-                <td>글쓴이</td>
-                <td>날짜</td>
-                <td>조회</td>
+                <th class="col-md-1">번호</th>
+                <th class="col-md-4">제목</th>
+                <th class="col-md-1">글쓴이</th>
+                <th class="col-md-1">날짜</th>
+                <th class="col-md-1">조회</th>
             </thead>
             <tbody>
                 {% for doc in docs %}
                     <tr>
                         <td>{{loop.index + ((page - 1) * limit)}}</td>
-                        <td><a href="{{url_for('boards.board_view', idx=doc._id, keyword=keyword, page=page, search=search)}}">{{doc.title}}</a></td>
+                        <td><a href="{{url_for('board.board_view', idx=doc._id, keyword=keyword, page=page, search=search)}}">{{doc.title}}</a></td>
                         <td>{{doc.name}}</td>
                         <td>{{doc.regdate | datetime_format}}</td>
                         <td>{{doc.hit}}</td>
@@ -45,37 +45,45 @@
         </table>
         <p></p>
 
+        <a class="btn btn-default pull-right" href="{{url_for('board.board_write')}}">글쓰기</a>
+
+        <div class="text-center">
         <!-- 검색처리 -->
-        <select name="search" id="search">
-            <option value="0" {% if search== 0 %} selected {% endif %}>제목</option>
-            <option value="1" {% if search== 1 %} selected {% endif %}>내용</option>
-            <option value="2" {% if search== 2 %} selected {% endif %}>제목+내용</option>
-            <option value="3" {% if search== 3 %} selected {% endif %}>글쓴이</option>
-        </select>
-        <input type="text" name="keyword" id="keyword"{% if keyword !="" %} value ={{keyword}} {% endif %}>
-        <input type="button" value="검색" onclick="search()">
-        <p></p>
+            <select name="search" id="search" class="search" >
+                <option value="0" {% if search== 0 %} selected {% endif %}>제목</option>
+                <option value="1" {% if search== 1 %} selected {% endif %}>내용</option>
+                <option value="2" {% if search== 2 %} selected {% endif %}>제목+내용</option>
+                <option value="3" {% if search== 3 %} selected {% endif %}>글쓴이</option>
+            </select>
+            <input type="text" name="keyword" id="keyword"{% if keyword !="" %} value ={{keyword}} {% endif %}>
+            <input class="btn btn-default" type="button" value="검색" onclick="search()">
+            <p></p>
 
-        {% if block_start -1 > 0 %}
-            <a href="{{url_for('boards.list', page=block_start -1, keyword=keyword, search=search)}}">[이전]</a>
-        {% endif %}
 
-        {% for i in range(block_start, block_last+1) %}
-            {% if i == page %}
-                <b>{{i}}</b>
-            {% else %}
-                <a href="{{url_for('boards.list', page=i, keyword=keyword, search=search)}}}">{{i}}</a>
-            {% endif %}
-        {% endfor %}
+            <ul class="pagination">        
+                {% if block_start -1 > 0 %}
+                    <li>
+                        <a href="{{url_for('board.list', page=block_start -1, keyword=keyword, search=search)}}">이전</a>
+                    </li>
+                {% endif %}
 
-        {% if block_last < last_page_num %}
-            <a href="{{url_for('boards.list', page=block_last + 1, keyword=keyword, search=search)}}">[NEXT]</a>
-        {% endif %}
+                {% for i in range(block_start, block_last+1) %}
+                    <li>
+                        <a href="{{url_for('board.list', page=i, keyword=keyword, search=search)}}">{{i}}</a>
+                    </li>
+                {% endfor %}
+                
+                {% if block_last < last_page_num %}
+                    <li>
+                        <a href="{{url_for('board.list', page=block_last + 1, keyword=keyword, search=search)}}">다음</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
 
     {% else %}
         <h3>리스트가 없습니다.</h3>
     {% endif %}
     
     </br>
-    <a href="{{url_for('boards.board_write')}}">글쓰기</a>
 {% endblock content %}

@@ -11,7 +11,7 @@
 <h3>로그인</h3>
 
 <div class="login-form">
-    <form action="/login" method="POST" name="form">
+    <form action="{{url_for('member.member_login')}}" method="POST" name="form">
         {% if next_url %}
             <input type="hidden" name="next_url" value={{next_url}}>
         {% endif %}

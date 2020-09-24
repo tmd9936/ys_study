@@ -1,16 +1,7 @@
-from . import users_blueprint
-from flask import render_template, request, url_for
-from flask import url_for, redirect, flash, session, abort
-
-from flask_pymongo import ObjectId
-
-from project.commons import constant as const
-from project.commons import decorates as deco
-
-from project import mongo
+from . import *
 from datetime import datetime
 
-@users_blueprint.route("/join", methods=["GET","POST"])
+@members_blueprint.route("/join", methods=["GET","POST"])
 def member_join():
     if request.method == "POST":
         name = request.form.get("name", type=str)
@@ -56,7 +47,7 @@ def member_join():
     else:
         return render_template('join.html')
 
-@users_blueprint.route('/login', methods=['GET','POST'])
+@members_blueprint.route('/login', methods=['GET','POST'])
 def member_login():
     if request.method == "POST":
         email = request.form.get("email")
@@ -69,7 +60,7 @@ def member_login():
 
         if doc is None:
             flash("이메일이 존재하지 않습니다.. 다시 로그인 하세요")
-            return redirect(url_for("member_login"))
+            return redirect(url_for("user.member_login"))
         else:
             if doc.get("pw") == password:
                 session["email"] = email
@@ -81,10 +72,10 @@ def member_login():
                 if next_url is not None:
                     return redirect(next_url)
                 else:      
-                    return redirect(url_for('boards.list'))
+                    return redirect(url_for('board.list'))
             else:
                 flash("비밀번호가 일치하지 않습니다. 다시 확인하세요")
-                return redirect(url_for('users.member_login'))
+                return redirect(url_for('user.member_login'))
 
         return ""
     else:
@@ -95,8 +86,8 @@ def member_login():
             return render_template("login.html")   
 
   
-@users_blueprint.route('/logout', methods=['GET'])
+@members_blueprint.route('/logout', methods=['GET'])
 def logout():
     session.clear()
     # sss
-    return redirect(url_for("boards.index"))
+    return redirect(url_for("index"))

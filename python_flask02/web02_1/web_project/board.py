@@ -1,7 +1,13 @@
 from web_project import *
 
+# 플라스크의 Blueprint 객체는 라우트를 구조적으로
+# 관리할 수 있도록 하는 객체
+# Blueprint("이름", __name__, url_prefix='/')
+from flask import Blueprint
 
-@app.route("/list")
+bp = Blueprint("board",__name__,url_prefix="/board")
+
+@bp.route("/list")
 def list():
     # 페이지 값
     # page 매개변수가 없을 경우 기본값을 1로
@@ -103,7 +109,7 @@ def list():
 
 
 # clean-url, fancy-url 표기 방식은 (보안적인 측면 고려, 사용편의성 고려한 표기방식)
-@app.route("/view/<idx>")
+@bp.route("/view/<idx>")
 @login_required
 def board_view(idx):
 
@@ -139,7 +145,7 @@ def board_view(idx):
 
     return abort(404)
 
-@app.route("/write", methods=["GET", "POST"])
+@bp.route("/write", methods=["GET", "POST"])
 @login_required
 def board_write():
     if request.method == "POST":
@@ -176,12 +182,12 @@ def board_write():
 
         # 렌더링을 할 경우에는 inserted_id는 Object객체이므로 문자열로 형변환 해야한다
         # return str(doc.inserted_id)
-        return redirect(url_for("board_view", idx=doc.inserted_id))
+        return redirect(url_for("board.board_view", idx=doc.inserted_id))
     else :
         return render_template("write.html")
 
 
-@app.route("/modify/<idx>", methods=["GET","POST"])
+@bp.route("/modify/<idx>", methods=["GET","POST"])
 def modify(idx):
     if request.method == "GET":
         board = mongo.db.board
@@ -189,7 +195,7 @@ def modify(idx):
 
         if data is None:
             flash("게시물이 존재하지 않습니다.")
-            return redirect(url_for("list"))
+            return redirect(url_for("board.list"))
         else:
             if session.get("id") == data.get("writer_id"):
                 return render_template("modify.html", data=data)
@@ -215,14 +221,14 @@ def modify(idx):
             )
 
             flash('수정되었습니다.')
-            return redirect(url_for("board_view", idx = idx))
+            return redirect(url_for("board.board_view", idx = idx))
         else:
             flash("글수정 권한이 없습니다.")
-            return redirect(url_for("list"))
+            return redirect(url_for("board.list"))
     
     return ""
 
-@app.route("/delete/<idx>")
+@bp.route("/delete/<idx>")
 def delete(idx):
     board = mongo.db.board
     data = board.find_one({"_id":ObjectId(idx)})
@@ -232,7 +238,7 @@ def delete(idx):
     else:
         flash("대상없음")
 
-    return redirect(url_for("list"))
+    return redirect(url_for("board.list"))
 
 
 @app.route("/")

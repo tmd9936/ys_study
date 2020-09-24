@@ -1,13 +1,15 @@
 from web_project import *
+from flask import Blueprint
+
+bp = Blueprint("member", __name__, url_prefix="/member")
 
 
-
-@app.route("/logout", methods=["GET"])
+@bp.route("/logout", methods=["GET"])
 def logout():
     session.clear()
-    return redirect(url_for("list"))
+    return redirect(url_for("board.list"))
 
-@app.route("/join", methods=["GET","POST"])
+@bp.route("/join", methods=["GET","POST"])
 def member_join():
     if request.method == "POST":
         name = request.form.get("name", type=str)
@@ -63,7 +65,7 @@ def member_join():
     else:
         return render_template("join.html")
 
-@app.route("/login", methods=["GET","POST"])
+@bp.route("/login", methods=["GET","POST"])
 def member_login():
     if request.method == "POST":
         email = request.form.get("email")
@@ -76,7 +78,7 @@ def member_login():
 
         if doc is None:
             flash("이메일이 존재하지 않습니다.. 다시 로그인 하세요")
-            return redirect(url_for("member_login"))
+            return redirect(url_for("board.member_login"))
         else:
             if doc.get("pw") == password:
                 session["email"] = email
@@ -89,10 +91,10 @@ def member_login():
                     return redirect(next_url)
                 else:      
 
-                    return redirect(url_for('list'))
+                    return redirect(url_for('board.list'))
             else:
                 flash("비밀번호가 일치하지 않습니다. 다시 확인하세요")
-                return redirect(url_for('member_login'))
+                return redirect(url_for('board.member_login'))
 
         return ""
     else:
