@@ -18,7 +18,8 @@ def datetime_format(value):
     print(utc_datetiem)
 
     offset_time = local_datetime - utc_datetiem
-    print("offser_time : ", offset_time)
+    print("offset_time : ", offset_time)
+    
 
     value = datetime.fromtimestamp((int(value) / 1000)) + offset_time
 

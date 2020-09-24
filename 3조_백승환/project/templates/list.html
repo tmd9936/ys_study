@@ -22,6 +22,11 @@
         {% endif %}
     {% endwith %}
 
+    {% if session['name'] %}
+        <a class="btn btn-default pull-right" href="{{url_for('board.list')}}?search=3&keyword={{session['name']}}">내글보기</a>
+    {% endif %}
+
+
     {% if docs.count()  > 0 %}
         <table class="table table-striped">
             <thead>
@@ -44,7 +49,7 @@
             </tbody>
         </table>
         <p></p>
-
+        
         <a class="btn btn-default pull-right" href="{{url_for('board.board_write')}}">글쓰기</a>
 
         <div class="text-center">

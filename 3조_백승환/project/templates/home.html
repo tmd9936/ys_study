@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Flask Study</h1>
+    <p>
+        {% if session["id"] %}
+            {{session['name']}}님 안녕하세요!! 환영합니다.
+        {% else %}
+            저희 웹사이트에 오신것을 환영합니다.
+        {% endif %}
+    </p>
+{% endblock content %}

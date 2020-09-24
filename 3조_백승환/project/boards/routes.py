@@ -54,7 +54,8 @@ def list():
                                         block_last = block_last,
                                         last_page_num = last_page_num,
                                         keyword=keyword,
-                                        search=search)    
+                                        search=search,
+                                        title='리스트')    
 
 
 
@@ -102,7 +103,13 @@ def board_view(idx):
             print(next_board_id)
             
 
-            return render_template("view.html", result = result, search = search, keyword = keyword, page=page, next_board_id=next_board_id, prev_board_id=prev_board_id)
+            return render_template("view.html", result = result, 
+                                                search = search, 
+                                                keyword = keyword, 
+                                                page=page, 
+                                                next_board_id=next_board_id, 
+                                                prev_board_id=prev_board_id,
+                                                title=data.get("title"))
 
     return abort(404)
 
@@ -145,7 +152,7 @@ def board_write():
         # return str(doc.inserted_id)
         return redirect(url_for("board.board_view", idx=doc.inserted_id))
     else :
-        return render_template("write.html") 
+        return render_template("write.html", title="글쓰기") 
 
 
 @boards_blueprint.route("/modify/<idx>", methods=["GET", "POST"])
@@ -160,7 +167,7 @@ def board_modify(idx):
             return redirect(url_for("board.list"))
         else:
             if session.get("id") == data.get("writer_id"):
-                return render_template("modify.html", data=data)
+                return render_template("modify.html", data=data, title="글수정")
             else:
                 flash('글 수정 권한이 없습니다.')
                 return redirect(url_for("board.board_view", idx=idx))

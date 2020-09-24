@@ -19,16 +19,14 @@
         </form>
         <ul class="nav navbar-nav navbar-right">
             {% if session['name'] %}
-                <li>
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{session['name']}}
-                    <span class="caret"></span></button>
+                <li class="dropdown">
+                    <a class="btn dropdown-toggle" data-toggle="dropdown">사용자
+                    <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">HTML</a></li>
                         <li><a href="#">CSS</a></li>
                         <li><a href="#">JavaScript</a></li>
                     </ul>
-                </div>
                 </li>
                 <li><a href="{{url_for('member.logout')}}">로그아웃</a></li>
             {% else %}

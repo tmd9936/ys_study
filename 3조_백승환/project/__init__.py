@@ -7,8 +7,9 @@ app.config.from_pyfile('flask.cfg')
 
 mongo = PyMongo(app)
 
-from project.boards import boards_blueprint
-from project.members import members_blueprint
+from .boards import boards_blueprint
+from .members import members_blueprint
+from . import routes
 # from flask import Blueprint
 
 # main_blueprint = Blueprint('main', __name__, template_folder='templates')
@@ -17,5 +18,4 @@ from project.members import members_blueprint
 app.register_blueprint(boards_blueprint)
 app.register_blueprint(members_blueprint)
 
-from . import routes
 
