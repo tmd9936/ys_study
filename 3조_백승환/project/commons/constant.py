@@ -1,1 +1,1 @@
-PAGE_LIMIT = 2
+PAGE_LIMIT = 4

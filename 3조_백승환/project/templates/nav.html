@@ -1,38 +1,36 @@
-<nav class="navbar navbar-inverse" role="navigation">
-    <div class="container-fuid">
-        <div class="navbar-header">
-            <a href="" class="navbar-brand" href="/">LOGO</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Home</a></li>
-            <li><a href="{{url_for('board.list')}}">게시판</a></li>
-            <li><a href="#">Help</a></li>
-            <li><p> </p></li>
-            <li><p> </p></li>
-            <li><p> </p></li>
-        </ul>
-        <form action="" class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-                <input type="text" name="search" class="form-control" placeholder="검색" id="">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-xl">
+      <a class="navbar-brand" href="{{url_for('home')}}">LOGO</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07XL" aria-controls="navbarsExample07XL" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarsExample07XL">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{{url_for('home')}}">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('board.list')}}">게시판</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown07XL" data-toggle="dropdown" aria-expanded="false">사용자</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown07XL">
+              {% if session["id"] %}
+                <a class="dropdown-item" href="#">나의 프로필</a>
+                <a class="dropdown-item" href="#">주문내역</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{{url_for('member.logout')}}">로그아웃</a>
+              {% else %}
+                <a class="dropdown-item" href="{{url_for('member.member_join')}}">회원가입</a>         
+                <a class="dropdown-item" href="{{url_for('member.member_login')}}">로그인</a>
+              {% endif %}
             </div>
-            <button type="submit" class="btn btn-default">확인</button>
-        </form>
-        <ul class="nav navbar-nav navbar-right">
-            {% if session['name'] %}
-                <li class="dropdown">
-                    <a class="btn dropdown-toggle" data-toggle="dropdown">사용자
-                    <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">HTML</a></li>
-                        <li><a href="#">CSS</a></li>
-                        <li><a href="#">JavaScript</a></li>
-                    </ul>
-                </li>
-                <li><a href="{{url_for('member.logout')}}">로그아웃</a></li>
-            {% else %}
-                <li><a href="{{url_for('member.member_join')}}">회원가입</a></li>         
-                <li><a href="{{url_for('member.member_login')}}">로그인</a></li>
-            {% endif %}
+          </li>
         </ul>
+        <form class="form-inline my-2 my-md-0">
+          <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+        </form>
+      </div>
     </div>
-</nav>
+  </nav>

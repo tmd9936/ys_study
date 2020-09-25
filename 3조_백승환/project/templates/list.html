@@ -22,73 +22,133 @@
         {% endif %}
     {% endwith %}
 
-    {% if session['name'] %}
-        <a class="btn btn-default pull-right" href="{{url_for('board.list')}}?search=3&keyword={{session['name']}}">내글보기</a>
-    {% endif %}
+    
+    <div class="row">
+      <div class="col-md-8 blog-main">
+          <div class="blog-post">
+              <h3 class="pb-4 mb-4 font-italic border-bottom">
+                리스트
+              </h3>
+        </div><!-- /.blog-post -->
+        {% if session['name'] %}
+            <a class="btn btn-default pull-right" href="{{url_for('board.list')}}?search=3&keyword={{session['name']}}">내글보기</a>
+        {% endif %}
 
 
-    {% if docs.count()  > 0 %}
-        <table class="table table-striped">
-            <thead>
-                <th class="col-md-1">번호</th>
-                <th class="col-md-4">제목</th>
-                <th class="col-md-1">글쓴이</th>
-                <th class="col-md-1">날짜</th>
-                <th class="col-md-1">조회</th>
-            </thead>
-            <tbody>
-                {% for doc in docs %}
-                    <tr>
-                        <td>{{loop.index + ((page - 1) * limit)}}</td>
-                        <td><a href="{{url_for('board.board_view', idx=doc._id, keyword=keyword, page=page, search=search)}}">{{doc.title}}</a></td>
-                        <td>{{doc.name}}</td>
-                        <td>{{doc.regdate | datetime_format}}</td>
-                        <td>{{doc.hit}}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <p></p>
-        
-        <a class="btn btn-default pull-right" href="{{url_for('board.board_write')}}">글쓰기</a>
+        {% if docs.count()  > 0 %}
+            <table class="table table-striped">
+                <thead>
+                    <th >번호</th>
+                    <th >제목</th>
+                    <th >글쓴이</th>
+                    <th>날짜</th>
+                    <th >조회</th>
+                </thead>
+                <tbody>
+                    {% for doc in docs %}
+                        <tr>
+                            <td>{{loop.index + ((page - 1) * limit)}}</td>
+                            <td><a href="{{url_for('board.board_view', idx=doc._id, keyword=keyword, page=page, search=search)}}">{{doc.title}}</a></td>
+                            <td>{{doc.name}}</td>
+                            <td>{{doc.regdate | datetime_format}}</td>
+                            <td>{{doc.hit}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <p></p>
+            
+            <a class="btn btn-sm btn-outline-secondary" href="{{url_for('board.board_write')}}">글쓰기</a>
 
-        <div class="text-center">
-        <!-- 검색처리 -->
-            <select name="search" id="search" class="search" >
-                <option value="0" {% if search== 0 %} selected {% endif %}>제목</option>
-                <option value="1" {% if search== 1 %} selected {% endif %}>내용</option>
-                <option value="2" {% if search== 2 %} selected {% endif %}>제목+내용</option>
-                <option value="3" {% if search== 3 %} selected {% endif %}>글쓴이</option>
-            </select>
-            <input type="text" name="keyword" id="keyword"{% if keyword !="" %} value ={{keyword}} {% endif %}>
-            <input class="btn btn-default" type="button" value="검색" onclick="search()">
+            <div class="text-center">
+                <div class="form-row">
+                    <div class="col"></div>
+            
+                <!-- 검색처리 -->
+                    <div class="col">
+
+                        <select name="search" id="search" class="form-control" >
+                            <option value="0" {% if search== 0 %} selected {% endif %}>제목</option>
+                            <option value="1" {% if search== 1 %} selected {% endif %}>내용</option>
+                            <option value="2" {% if search== 2 %} selected {% endif %}>제목+내용</option>
+                            <option value="3" {% if search== 3 %} selected {% endif %}>글쓴이</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <input class="form-control"  type="text" name="keyword" id="keyword"{% if keyword !="" %} value ={{keyword}} {% endif %}>
+                    </div>
+
+                    <input class="btn btn-primary" type="button" value="검색" onclick="search()">
+
+                    <div class="col"></div>
+                </div>
+            </div>
             <p></p>
 
 
-            <ul class="pagination">        
+            <ul class="pagination justify-content-center">        
                 {% if block_start -1 > 0 %}
-                    <li>
-                        <a href="{{url_for('board.list', page=block_start -1, keyword=keyword, search=search)}}">이전</a>
+                    <li class="page-item">
+                        <a class="page-link" href="{{url_for('board.list', page=block_start -1, keyword=keyword, search=search)}}">이전</a>
                     </li>
                 {% endif %}
 
                 {% for i in range(block_start, block_last+1) %}
-                    <li>
-                        <a href="{{url_for('board.list', page=i, keyword=keyword, search=search)}}">{{i}}</a>
-                    </li>
+                    {% if i==page %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{url_for('board.list', page=i, keyword=keyword, search=search)}}" style="color: lightsalmon;">{{i}}</a>
+                        </li>
+                    {% else %}
+
+                        <li class="page-item">
+                            <a class="page-link" href="{{url_for('board.list', page=i, keyword=keyword, search=search)}}">{{i}}</a>
+                        </li>
+                    {% endif %}
                 {% endfor %}
                 
                 {% if block_last < last_page_num %}
-                    <li>
-                        <a href="{{url_for('board.list', page=block_last + 1, keyword=keyword, search=search)}}">다음</a>
+                    <li class="page-item">
+                        <a class="page-link" href="{{url_for('board.list', page=block_last + 1, keyword=keyword, search=search)}}">다음</a>
                     </li>
                 {% endif %}
             </ul>
-        </div>
+        
 
-    {% else %}
-        <h3>리스트가 없습니다.</h3>
-    {% endif %}
-    
-    </br>
+        {% else %}
+            <h3>리스트가 없습니다.</h3>
+        {% endif %}
+        
+        </br>  
+  
+      </div><!-- /.blog-main -->
+  
+      <aside class="col-md-4 blog-sidebar">
+        <div class="p-4 mb-3 bg-light rounded">
+          <h4 class="font-italic">About</h4>
+          <p class="mb-0">Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+        </div>
+  
+        <div class="p-4">
+          <h4 class="font-italic">Archives</h4>
+          <ol class="list-unstyled mb-0">
+            <li><a href="#">March 2014</a></li>
+            <li><a href="#">February 2014</a></li>
+            <li><a href="#">January 2014</a></li>
+            <li><a href="#">December 2013</a></li>
+            <li><a href="#">November 2013</a></li>
+          </ol>
+        </div>
+  
+        <div class="p-4">
+          <h4 class="font-italic">Elsewhere</h4>
+          <ol class="list-unstyled">
+            <li><a href="#">GitHub</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Facebook</a></li>
+          </ol>
+        </div>
+      </aside><!-- /.blog-sidebar -->
+  
+    </div><!-- /.row -->
+  
 {% endblock content %}

@@ -1,15 +1,44 @@
 {% extends 'base.html' %}
 {% block content %}
+<!-- 
+    자바스크립트에서 정규 표현식(regex, regular expression)
+    형식 :
+    /정규식 문법/
+
+
+ -->
+
 <script>
+
+    // 이메일 유효성 검사를 하는 함수
+    function validateEmail(email) 
+    {
+        let pattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+
+        // 입력한 email 문자열을 테스트해서 true 또는 false를 리턴
+        return pattern.test(email);
+
+    }
+
+
     function chk_form() 
     {
-        if($.trim($("#email").val()) == "")
+        let email_val = $.trim($("#email").val());
+        if(email_val == "")
         {
             alert("이메일을 입력하세요.");
             $("#email").focus();
             return false;
         }
-        else if($.trim($("input[name=pw]").val()) == "")
+
+        if(!validateEmail(email_val))
+        {
+            alert("이메일 형식이 아닙니다. 다시 확인하세요!");
+            $("#email").focus();
+            return false;
+        }
+
+        if($.trim($("input[name=pw]").val()) == "")
         {
             alert("비밀번호를 입력하세요.");
             $('input[name=pw]').focus();
@@ -19,7 +48,7 @@
         return ture;
     }
 </script>
-
+<link rel="stylesheet" href="{{url_for('static', filename='css/login.css')}}">
 
 
     {% with messages = get_flashed_messages() %}
@@ -29,20 +58,19 @@
             </script>
         {% endif %}
     {% endwith %}
-    <h3>로그인</h3>
 
-    <div class="login-form">
-        <form action="{{url_for('member.member_login')}}" method="POST" name="form" onsubmit="return chk_form()">
+    <div class="text-center login-box">
+        <form class="form-signin" action="{{url_for('member.member_login')}}" method="POST" name="form" onsubmit="return chk_form()">
+            <h1 class="h3 mb-3 font-weight-normal">로그인</h1>
             {% if next_url %}
                 <input type="hidden" name="next_url" value={{next_url}}>
             {% endif %}
-            <ul>
-                <li>이메일</li>
-                <li><input type="text" name="email" id="email"></li>
-                <li>비밀번호</li>
-                <li><input type="password" name="pw"></li>
-                <li><input type="submit" value="로그인"></li>
-            </ul>
+            <label for="email" class="sr-only">이메일</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="Email address" required autofocus>
+            <label for="pw" class="sr-only">Password</label>
+            <input type="password" id="pw" name="pw" class="form-control" placeholder="Password" required>
+            <br>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
         </form>
     </div>
 {% endblock content %}

@@ -44,7 +44,7 @@ def member_join():
 
         members.insert_one(post_data)
 
-        return "<h3>회원가입 처리 되었습니다.</h3>"
+        return redirect(url_for('member.member_login', title="로그인"))
         
     else:
         return render_template("join.html", title="회원가입")
