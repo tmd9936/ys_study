@@ -1,0 +1,29 @@
+{% extends "sub_layout.html" %}
+{% block contents_left %}
+<div class="blog-post">
+    <h3 class="pb-4 mb-4 font-italic border-bottom">
+        글수정
+    </h3>
+</div><!-- /.blog-post -->
+<form action="{{url_for('board.board_modify', idx=data._id)}}" method="POST" name="form" onsubmit="return chk_form()">
+    <div class="form-group">
+        <label for="name" >글쓴이</label>
+        <input class="form-control" type="text" name="name" size="28" value="{{session['name']}}" id="name" readonly>
+    </div>
+    <div class="form-group">
+        <label for="title">제목</label>
+        <input class="form-control" type="text" name="title" size="28" id="title" value="{{data.title}}" placeholder="제목을 입력하세요">
+    </div>
+    <div class="form-group">
+        <label for="contents">내용</label>
+        <textarea class="form-control" name="contents" cols="30" rows="10" id="summernote"  placeholder="내용을 입력하세요">{{data.contents}}</textarea>
+    </div>
+    <div class="text-left">
+
+        <input class="btn btn-primary" type="submit" value="수정">
+        
+    </div>
+    <br>
+</form>
+
+{% endblock contents_left %}

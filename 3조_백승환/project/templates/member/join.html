@@ -20,7 +20,7 @@
         }
     
     
-        function chk_form() 
+        function join_chk_form() 
         {
             let email_val = $.trim($("#email").val());
 
@@ -64,25 +64,31 @@
     </script>
     <link rel="stylesheet" href="{{url_for('static', filename='css/join.css')}}">
 
-    <h1 class="h3 mb-3 font-weight-normal">회원가입</h1>
-    <div class="text-center join-box">
+    <div class="join-box">
+        
 
+        <form class="form-signin" action="{{url_for('member.member_join')}}" method="POST" name="form" onsubmit="return join_chk_form()">
+            <h1 class="h3 mb-3 font-weight-normal text-center">회원가입</h1>
+            <div class="form-group">
+                <label for="name">이름</label>
+                <input class="form-control" type="text" name="name" id="name">
+            </div>
+            <div class="form-group">
+                <label for="email">이메일</label>
+                <input class="form-control" type="email" name="email" id="email">
+            </div>
+            <div class="form-group">
+                <label for="name">비밀번호</label>
+                <input class="form-control" type="password" name="pw" id="pw">
+            </div>
+            <div class="form-group">
+                <label for="name">비밀번호 확인</label>
+                <input class="form-control" type="password" name="pw2" id="pw2">
+            </div>
 
-        <form class="form-signin" action="{{url_for('member.member_join')}}" method="POST" name="form" onsubmit="return chk_form()">
-            <ul style="padding-left: 0px;">
-                <li>이름</li>
-                <li><input type="text" name="name" id="name"></li>
-                <li>이메일</li>
-                <li><input type="email" name="email" id="email"></li>
-                <li>비밀번호</li>
-                <li><input type="password" name="pw" id="pw"></li>
-                <li>비밀번호 확인</li>
-                <li><input type="password" name="pw2" id="pw2"></li>
-                <p></p>
-                <li><input class="btn btn-primary " type="submit" value="회원가입"></li>
-            </ul>
-
-            
+            <div class="text-center">
+                <input class="btn btn-primary" type="submit" value="회원가입">
+            </div>
             
         </form>
     </div>

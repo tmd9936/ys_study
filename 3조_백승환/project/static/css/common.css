@@ -1,14 +1,23 @@
 li {list-style: none;}
 
 h1 {margin-left: 20px;}
-
+html {
+  width: 100%;
+}
 body {
     padding-bottom: 20px;
     min-height: 90%;
+    width: 100%;
+    height: 100%;
 }
   
 .navbar {
     margin-bottom: 20px;
+}
+
+main {
+  height: 100%;
+  width: 100%;
 }
   
 

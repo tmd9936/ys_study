@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<link rel="stylesheet" href="{{url_for('static', filename='css/carousel.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='css/home.css')}}">
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -9,7 +9,11 @@
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#977"/></svg>
+
+        <video class="video-fluid" autoplay loop muted>
+          <source src="{{url_for('static', filename='images/back1.webm')}}" type="video/mp4" />
+        </video>
+        
         <div class="container">
           <div class="carousel-caption text-left">
             <h2>Flask Study 페이지에 오신것을 환영합니다.</h2>
@@ -19,7 +23,9 @@
         </div>
       </div>
       <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#797"/></svg>
+        <video class="video-fluid" autoplay loop muted>
+          <source src="{{url_for('static', filename='images/home1.webm')}}" type="video/mp4" />
+        </video>
         <div class="container">
           <div class="carousel-caption">
             <h2>인공지능을 이용한 영상처리</h2>
@@ -29,7 +35,7 @@
         </div>
       </div>
       <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#779"/></svg>
+        <img src="{{url_for('static',filename='images/zplip.webp')}}" alt="z">
         <div class="container">
           <div class="carousel-caption text-right">
             <h2>데이터 사이언스와 라이다이용</h2>

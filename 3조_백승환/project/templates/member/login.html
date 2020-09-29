@@ -21,7 +21,7 @@
     }
 
 
-    function chk_form() 
+    function login_chk_form() 
     {
         let email_val = $.trim($("#email").val());
         if(email_val == "")
@@ -59,16 +59,20 @@
         {% endif %}
     {% endwith %}
 
-    <div class="text-center login-box">
-        <form class="form-signin" action="{{url_for('member.member_login')}}" method="POST" name="form" onsubmit="return chk_form()">
-            <h1 class="h3 mb-3 font-weight-normal">로그인</h1>
+    <div class="login-box">
+        <form class="form-signin" action="{{url_for('member.member_login')}}" method="POST" name="form" onsubmit="return login_chk_form()">
+            <h1 class="h3 mb-3 font-weight-normal text-center">로그인</h1>
             {% if next_url %}
                 <input type="hidden" name="next_url" value={{next_url}}>
             {% endif %}
-            <label for="email" class="sr-only">이메일</label>
-            <input type="email" id="email" name="email" class="form-control" placeholder="Email address" required autofocus>
-            <label for="pw" class="sr-only">Password</label>
-            <input type="password" id="pw" name="pw" class="form-control" placeholder="Password" required>
+            <div class="form-group">
+                <label for="email">이메일</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Email address" required autofocus>
+            </div>
+            <div class="form-group">
+                <label for="pw">비밀번호</label>
+                <input type="password" id="pw" name="pw" class="form-control" placeholder="Password" required>
+            </div>
             <br>
             <button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
         </form>

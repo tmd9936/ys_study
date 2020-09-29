@@ -47,7 +47,7 @@ def list():
     if block_last > last_page_num:
         block_last = last_page_num
 
-    return render_template("list.html", docs = docs, 
+    return render_template("bbs/list.html", docs = docs, 
                                         limit = limit,
                                         page = page,
                                         block_start = block_start,
@@ -103,7 +103,7 @@ def board_view(idx):
             print(next_board_id)
             
 
-            return render_template("view.html", result = result, 
+            return render_template("bbs/view.html", result = result, 
                                                 search = search, 
                                                 keyword = keyword, 
                                                 page=page, 
@@ -152,7 +152,7 @@ def board_write():
         # return str(doc.inserted_id)
         return redirect(url_for("board.board_view", idx=doc.inserted_id))
     else :
-        return render_template("write.html", title="글쓰기") 
+        return render_template("bbs/write.html", title="글쓰기") 
 
 
 @boards_blueprint.route("/modify/<idx>", methods=["GET", "POST"])
@@ -167,7 +167,7 @@ def board_modify(idx):
             return redirect(url_for("board.list"))
         else:
             if session.get("id") == data.get("writer_id"):
-                return render_template("modify.html", data=data, title="글수정")
+                return render_template("bbs/modify.html", data=data, title="글수정")
             else:
                 flash('글 수정 권한이 없습니다.')
                 return redirect(url_for("board.board_view", idx=idx))
