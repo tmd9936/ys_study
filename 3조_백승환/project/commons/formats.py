@@ -14,15 +14,23 @@ def datetime_format(value):
     print(local_datetime)
 
     # utcgromtimestamp는 UTC datetime을 리턴
-    utc_datetiem = datetime.utcfromtimestamp(now_timestamp)
-    print(utc_datetiem)
+    utc_datetime = datetime.utcfromtimestamp(now_timestamp)
+    print(utc_datetime)
 
-    offset_time = local_datetime - utc_datetiem
+    offset_time = local_datetime - utc_datetime
     print("offset_time : ", offset_time)
     
 
     value = datetime.fromtimestamp((int(value) / 1000)) + offset_time
 
-    return value.strftime("%Y-%m-%d %H:%M:%S")
+    # 글작성 날짜
+    write_data = value.strftime('%Y-%m-%d')
+    # 오늘 날짜
+    today_data = utc_datetime.strftime('%Y-%m-%d')
 
-    
+    if write_data == today_data:
+        return value.strftime('%H:%M:%S')
+    else:
+        return value.strftime("%Y-%m-%d")
+
+

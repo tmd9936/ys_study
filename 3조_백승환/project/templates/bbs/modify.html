@@ -1,8 +1,8 @@
 {% extends "sub_layout.html" %}
 {% block contents_left %}
 <div class="blog-post">
-    <h3 class="pb-4 mb-4 font-italic border-bottom">
-        글수정
+    <h3 class="pb-4 mb-4 bbs-title">
+        게시판 - 글수정
     </h3>
 </div><!-- /.blog-post -->
 <form action="{{url_for('board.board_modify', idx=data._id)}}" method="POST" name="form" onsubmit="return chk_form()">

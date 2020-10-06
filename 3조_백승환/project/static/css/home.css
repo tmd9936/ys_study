@@ -26,6 +26,7 @@ body {
 .carousel-item {
   height: 32rem;
 }
+
 .carousel-item > img {
   position: absolute;
   top: 0;
@@ -34,7 +35,17 @@ body {
   height: 32rem;
 }
 
+.c-item-3 {
+  background-image: url("../images/flask.png");
+  background-size: cover;
 
+}
+
+.c-item-4 {
+  background-image: url("../images/ai.png");
+  background-size: cover;
+
+}
 /* MARKETING CONTENT
 -------------------------------------------------- */
 

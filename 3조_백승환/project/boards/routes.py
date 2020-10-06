@@ -1,11 +1,39 @@
 from . import *
 import math
 from datetime import datetime
+from flask import Response
+from io import StringIO
+
+@boards_blueprint.route("/upload_image", methods=["POST"])
+def upload_image():
+    if request.method == "POST":
+        file = request.files["image"]
+        if file and allowed_file(file.filename):
+            # filename = "{}.jpg".format(rand_generator())
+            
+            # savefilepath = os.path.join(app.config["BOARD_IMAGE_PATH"], filename)
+            # file.save(savefilepath)
+            # return url_for("board.board_images", filename = filename)
+
+            img_io = StringIO()
+            #file.stream.read().save(img_io, 'PNG')
+            #img_io.seek(0)
+            return Response(file.stream.read(1024), mimetype='image/png')
+
+            
+
+
+
+
+@boards_blueprint.route("/images/<filename>")
+def board_images(filename):
+    return send_from_directory(app.config["BOARD_IMAGE_PATH"], filename)
+
 
 @boards_blueprint.route('/list')
 def list():
     page = request.args.get("page", default=1, type=int)
-
+    app.config["BOARD_IMAGE_PATH"]
     limit = request.args.get("limit", const.PAGE_LIMIT, type=int)
 
     search = request.args.get("search", -1, type=int)
@@ -146,6 +174,7 @@ def board_write():
 
         doc = board.insert_one(post_data)
         print(doc.inserted_id)
+        print(contents)
 
 
         # 렌더링을 할 경우에는 inserted_id는 Object객체이므로 문자열로 형변환 해야한다

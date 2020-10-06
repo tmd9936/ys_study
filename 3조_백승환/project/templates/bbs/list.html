@@ -28,9 +28,9 @@
 
 
     <div class="blog-post">
-        <h3 class="pb-4 mb-4 font-italic border-bottom">
-        리스트
-        </h3>
+        <h2 class="pb-4 mb-4 bbs-title">
+            게시판 - 리스트
+        </h2>
     </div><!-- /.blog-post -->
     {% if session['name'] %}
         <a class="btn btn-default pull-right" href="{{url_for('board.list')}}?search=3&keyword={{session['name']}}">내글보기</a>
