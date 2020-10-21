@@ -9,26 +9,26 @@ def upload_image():
     if request.method == "POST":
         file = request.files["image"]
         if file and allowed_file(file.filename):
-            # filename = "{}.jpg".format(rand_generator())
+            filename = "{}.jpg".format(rand_generator())
             
-            # savefilepath = os.path.join(app.config["BOARD_IMAGE_PATH"], filename)
-            # file.save(savefilepath)
-            # return url_for("board.board_images", filename = filename)
-
-            img_io = StringIO()
-            #file.stream.read().save(img_io, 'PNG')
-            #img_io.seek(0)
-            return Response(file.stream.read(1024), mimetype='image/png')
-
-            
-
-
-
+            savefilepath = os.path.join(app.config["BOARD_IMAGE_PATH"], filename)
+            file.save(savefilepath)
+            return url_for("board.board_images", filename = filename)
 
 @boards_blueprint.route("/images/<filename>")
 def board_images(filename):
     return send_from_directory(app.config["BOARD_IMAGE_PATH"], filename)
 
+@boards_blueprint.route("/files/<filename>")
+def board_files(filename):
+    return send_from_directory(app.config["BOARD_ATTACH_FILE_PATH"], filename, as_attachment=True)
+
+def board_delete_attach_file(filename):
+    abs_path = os.path.join(app.config["BOARD_ATTACH_FILE_PATH"],filename)
+    if os.path.exists(abs_path):
+        os.remove(abs_path)
+        return True
+    return False
 
 @boards_blueprint.route('/list')
 def list():
@@ -110,8 +110,11 @@ def board_view(idx):
                 "contents" : data.get("contents"),
                 "regdate" :data.get("regdate"),
                 "hit" : data.get("hit"),
-                "writer_id" : data.get("writer_id")
+                "writer_id" : data.get("writer_id"),
+                "attachFile":data.get("attachFile")
             }
+
+            print(result.get("attachFile"))
 
             next_board = board.find_one({"_id":{"$gt":_id}})
 
@@ -126,9 +129,6 @@ def board_view(idx):
                 prev_board_id = None
             else:
                 prev_board_id = prev_board.get('_id')
-
-            print(prev_board_id)
-            print(next_board_id)
             
 
             return render_template("bbs/view.html", result = result, 
@@ -145,10 +145,21 @@ def board_view(idx):
 @login_required
 def board_write():
     if request.method == "POST":
+        filename = None
+        if "attachFile" in request.files:
+            file = request.files["attachFile"]
+            if file and allowed_file(file.filename):
+                filename = check_filename(file.filename)
+                file.save(os.path.join(app.config["BOARD_ATTACH_FILE_PATH"], filename))
+        
+
+
         name = request.form.get("name")
         title = request.form.get("title")
         contents = request.form.get("contents")
-        print(name, title, contents)
+
+
+        # print(name, title, contents)
 
         # UTC는 국제 표준시 (참고: GMT(Greenwich Mean Time) - 그리니치 평균시, 세계 협정시)
         # UTC와 GMT는 혼용되어 사용됨, 시간차가 거의 없음.
@@ -172,9 +183,14 @@ def board_write():
             "hit" : 0
         }
 
+        if filename is not None:
+            post_data["attachFile"] = filename
+            print("filename : " + filename)
+
+
         doc = board.insert_one(post_data)
-        print(doc.inserted_id)
-        print(contents)
+        # print(doc.inserted_id)
+        # print(contents)
 
 
         # 렌더링을 할 경우에는 inserted_id는 Object객체이므로 문자열로 형변환 해야한다
@@ -204,17 +220,36 @@ def board_modify(idx):
     else:
         title = request.form.get('title')
         contents = request.form.get('contents')
+        delOldFile = request.form.get("delOldFile", "")
 
         board = mongo.db.board
         data = board.find_one({"_id":ObjectId(idx)})
 
 
         if session.get('id') == data.get('writer_id'):
+            filename = None
+            if "attachFile" in request.files:
+                file = request.files["attachFile"]
+                if file and allowed_file(file.filename):
+                    filename = check_filename(file.filename)
+                    file.save(os.path.join(app.config["BOARD_ATTACH_FILE_PATH"], filename))
+
+                    if data.get("attachFile"):
+                        board_delete_attach_file(data.attachFile)
+            else:
+                if delOldFile == "on":
+                    filename = None
+                    if data.get("attachFile"):
+                        board_delete_attach_file(data.get("attachFile"))
+                    else:
+                        filename = data.get("attachFile")
+
             board.update_one({"_id":ObjectId(idx)},
                 {"$set":
                     {
                         "title":title,
-                        "contents":contents
+                        "contents":contents,
+                        "attachFile":filename
                     }
                 }
             )

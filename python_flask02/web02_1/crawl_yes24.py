@@ -9,7 +9,7 @@ search_str = "c언어"
 
 encode_str = str(search_str.encode('euc-kr')).replace("\\x","%")[2:-1]
 
-print(encode_str)
+# print(encode_str)
 
 
 url = "http://www.yes24.com/searchcorner/Search?keywordAd=&keyword=&domain=ALL&qdomain=%C0%FC%C3%BC&query="+encode_str
@@ -21,6 +21,8 @@ res = requests.get(url, headers = header)
 bs = BeautifulSoup(res.text, "lxml")
 
 lists = bs.select("div.goodsList_list tr")
+
+print(lists)
 
 for li in lists:
     pass
