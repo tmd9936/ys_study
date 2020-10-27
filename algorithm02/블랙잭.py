@@ -37,20 +37,6 @@ def comb2(lis, n):
             for temp in comb2(lis[i+1:len(lis)], n-1):
                 yield lis[i] + temp
 
-def check(lis, limit_num):
-    max_num = 0
-    for i in range(1,len(lis)+1):
-        for cli in comb2(lis, i):
-            if cli <= limit_num and cli > max_num:
-                max_num = cli
-    return max_num
-
-
-def comb3(idx):
-    if idx >= 4:
-        for i in range(0,4):
-            result[i]
-
 
 
 # print(check(nums,limit_num))
