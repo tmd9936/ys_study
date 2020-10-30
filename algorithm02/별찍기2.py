@@ -16,13 +16,15 @@ def star(k):
     if k == 1:
         arr = [["*"]*1 for i in range(1)]
         return arr
-    for i in range(3):
-        for j in range(3):
-            if cnt == 5:
-                arr[i][j] = "#"
-            else:
-                arr[i][j] = "*"
-            cnt += 1
+    else:
+        cnt = 0
+        for i in range(3):
+            for j in range(3):
+                if cnt == 4:
+                    arr[i][j] = "0"
+                else:
+                    arr[i][j] = "*"
+                cnt += 1
         
 
 
