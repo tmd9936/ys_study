@@ -120,9 +120,14 @@ pwd : 현재 디렉토리 위치 ㅅ
 계정 종류
 ## root 계정과 사용자 계정
 
-## 계정 살펴보기 : /etc/passwd, /etc/shadow
+## 계정 살펴보기 : 
+	/etc/passwd : 기존의 계정 및 암호등 저장하고 있는 파일
+	/etc/shadow : 사용자 암호를 저장하고 있는 파일
+	/etc/group : 사용자의 그룹 정보를 저장하고 있는 파일
 
+## 계정 권한 확인하기
 * whoami
+* id
 
 ## super유저란?
 시스템 운영 관리자 계정으로 일반적으로 리눅스 운영체제에서는 root 유저를 말한다.
@@ -138,13 +143,43 @@ pwd : 현재 디렉토리 위치 ㅅ
 
 * su - user2 : user2의 id로 로그인 한다. (user2의 pw필요, user2의 홈디렉토리로 이동)
 
+* sudo su : root로 로그인
+* sudo su - : root의 홈 디렉토리(/root)로 이동 & 로그인
 
 
+# adduser : 사용자 추가
+# adduser : 사용자 계정 삭제
+
+## addgroup : 그룹계정 생성
+* addgroup aaa: aaa 그룹생성
+* delgroup aaa : aaa 그룹삭제
+
+## usermod : 사용자 계정 정보 수정, 사용자를 그룹에 추가할 때
+* usermod -a -G aaa user1 : 그룹 aaa에 유저1을 추가
+
+## chmod : 파일 접근 권한 변졍(숫자모드, 기호모드 사용)
+# 소유자(User) / 그룹(Group) / 그외(Other)
+
+* chmod 777 hello.txt      : user/group/other에 rwx권한 부여
+* chmod 700 hello.txt      : user에는 rwx권한 부여 (group/other에는 모든권한 제거, ---)
+
+* chmod u+x hello.txt      : user에 x(실행) 권한 추가
+* chmod u-x hello.txt       :	user에 x(실행) 권한 제거
+* chmod g+rw hello.txt    : group에 rw권한 추가
 
 
+## chown(change owner) : 소유권 변경
+## 앞에 :이 붙으면 그룹변경
+
+* chown user2 hello.txt        : hello.txt 파일의 소유자를 usr2로 변경
+* chown user2:user2 hello.txt : hello.txt 파일의 소유자와 그룹을 모두 user2로 변경
+* chown :user2 hello.txt        : hello.txt의 그룹을 user2로 변경 
+
+# chgrp : 그룹변경
+* chgrp user2 hello.txt        : hello.txt 파일의 그룹을 user2로 변경
 
 
-
+# chmod g+s /cowork : 폴더안에서 파일을 생성하면 폴더에 지정되어있는 그룹으로 권한이 부여됨
 
 
 

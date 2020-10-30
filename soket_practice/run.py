@@ -8,7 +8,8 @@ app.config["SECRET_KEY"] = "KEY"
 
 # json에서 ascii값 받지 않음
 app.config['JSON_AS_ASCII'] = False
-socketio = SocketIO(app)
+# app.config["Access-Control-Allow-Origin"] = "*"
+socketio = SocketIO(app=app, cors_allowed_origins='*')
 
 @app.route('/')
 def index():
@@ -22,13 +23,12 @@ def hadle_my_custom_event(req, methods=['GET', 'POST']):
     print('received my event: ' + str(req))
     if req.get('message') is not None:
         mes = req.get('message')
-        
-
+    
     socketio.emit('my response', req, callback=messageReceived)
 
 @socketio.on("draw")
 def handle_draw_event(data, methods=['GET','POST']):
-    print("draw data : ", data)
+    # print("draw data : ", data)
 
     socketio.emit('draw response', data, callback=messageReceived)
 # goolge 드라이브랑 연결
