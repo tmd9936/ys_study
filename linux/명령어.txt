@@ -155,10 +155,16 @@ pwd : 현재 디렉토리 위치 ㅅ
 * delgroup aaa : aaa 그룹삭제
 
 ## usermod : 사용자 계정 정보 수정, 사용자를 그룹에 추가할 때
+* -a : 더한다 -G : 그룹에
 * usermod -a -G aaa user1 : 그룹 aaa에 유저1을 추가
 
 ## chmod : 파일 접근 권한 변졍(숫자모드, 기호모드 사용)
 # 소유자(User) / 그룹(Group) / 그외(Other)
+
+8진수 표현
+421       421      421
+rwx       rwx      rwx
+소유자   그룹     다른사람
 
 * chmod 777 hello.txt      : user/group/other에 rwx권한 부여
 * chmod 700 hello.txt      : user에는 rwx권한 부여 (group/other에는 모든권한 제거, ---)
@@ -178,8 +184,22 @@ pwd : 현재 디렉토리 위치 ㅅ
 # chgrp : 그룹변경
 * chgrp user2 hello.txt        : hello.txt 파일의 그룹을 user2로 변경
 
-
+## 특수권한 : setGID
 # chmod g+s /cowork : 폴더안에서 파일을 생성하면 폴더에 지정되어있는 그룹으로 권한이 부여됨
+
+## 서로 공유하는 파일
+* o+t 권한을 넣어주면 함부로 못 지우게함
+* 관리자(소유자) 외에는 파일을 지울수 없음 
+* e.g) /tmp
+
+## 특수권한 set UID
+## u+s 
+## 다른유저의 권한을 빌려서 실행
+# rwS rws (소대문자)의 차이
+* 소문자 : x(실행권한)이 없음
+* 대문자 : x(실행권한)이 있음
+
+
 
 
 
