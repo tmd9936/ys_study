@@ -31,9 +31,11 @@ def handle_draw_event(data, methods=['GET','POST']):
     # print("draw data : ", data)
 
     socketio.emit('draw response', data, callback=messageReceived)
-# goolge 드라이브랑 연결
-# 관련 유튜브
+
 # 캐치마인드?
-# 달력
+# 색깔
+# 파일보내기
+# 방만들기
+
 if __name__ == "__main__":
     socketio.run(app, debug=True)
