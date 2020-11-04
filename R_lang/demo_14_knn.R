@@ -36,26 +36,29 @@ ctrl <- trainControl(method = "repeatedcv", number = 10, repeats = 5)
 customGrid <- expand.grid(k=1:10)
 
 # 알고리즘을 이용해 데이터 학습을 통한 모델 생성 - train()
-train(
+knnFit <- train(
   Class ~., # .은 모든데이터를 쓰겠다
   data = train,
   method = "knn",
   trControl = ctrl,
   preProcess = c("center", "scale"),
-  tuneGrid = customGrid
+  tuneGrid = customGrid,
+  metric = "Accuracy"
 )
 
+knnFit
 
 
 
+plot(knnFit)
+
+pred_test <- predict(knnFit, newdata = test)
+confusionMatrix(pred_test, test$Class)
 
 
-
-
-
-
-
-
+# 변수의 중요도
+importance_knn <- varImp(knnFit, scale=F)
+plot(importance_knn)
 
 
 
