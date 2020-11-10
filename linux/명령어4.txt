@@ -1,0 +1,176 @@
+ㅁ 우분투 운영체제의 부팅 프로세스
+
+- 고전적 부탕 시스템
+-- System-V : init service
+-- /etc/inittab
+
+- 개선된 부팅시스템(14.04까지)
+-- Upstart init service
+
+- 현재의 부팅시스템 (16.04부터)
+-- systemd boot process
+
+ㅁ 패키지
+: 리눗스의 다양한 운영테제에서는 내가가 원하는 프로스램(S/W)을 실행하기 위해서, 
+해당 소스코드를 해당환경에서 컴파일을 해야한다.
+
+** 이렇게 하는 이유 : 다양한 복호판, 커널버전차이
+
+** 소스코드는 어디서?
+   컴파일 할 때마다 시간이 걸림..?
+   컴파일 할 때마다 다양한 문제가 발생
+
+*** 그래서, 해당 배포판 환경에 맞추어서 미리 빌드한 실행파일을 압축한 것
+
+- 패키지 비교
+-- 윈도우즈 : .msi, .exe
+-- 데비안 리눅스 : .deb
+-- 레드햇 리눅스 : .rpm
+
+
+- 패키지 설치 유틸리티 및 리포지토리
+--apt
+--dpkg
+
+- apt 기본 명령어
+-- apt update : 리포지토리 내용 가져오기
+-- apt list : 리포지토리의 패키지 목록 출력
+-- apt list --installed : 설치된 패키지 목록 출력
+-- apt list --upgradable : 업그레이드 (업데이트) 가능한 목록 출력
+
+-- apt install : 리포지토리 내의 패키지 설치
+-- apt remove : 설치된 패키지 삭제 
+-- apt autoremove : 더 이상 사용되지 않는 패키지 삭제(업그레이드)
+
+
+-- apte upgrade : 패키지 업그레이드
+
+
+- dpkg(Debian package manager) .deb 파일
+: apt를 이용한 패키지 설치 과정에서 내부적으로 dpkg를 통해서 패키지가 설치되는 것이다
+: dpkg는 zip파일처럼 압축되어 있다.
+
+-- dpkg -i 패키지명 : 설치(install)
+-- dpkg -r 패키지명 : 삭제(remove)
+
+-- dpkg -s 패키지명 : 패키지 검색
+
+-- dpkg -I 패키지명 : 패키지 정보
+-- dpkg -c 패키지명 : 패키지 파일 상세 정보
+-- dpkg -x 패키지명 ./파일명 : 파일명에 패키지의 압축을 풀기
+-- dpkg -X 패키지명 ./파일명 : 파일명에 패키지의 압축을 풀기 + 진행사항 표기
+
+- 배포판 업그레이드 (우분투 업그레이드)
+-- update하고 upgrade 했으면 새로운 배포판으로 upgrade 할 수 있을 것임
+-- sudo do-release-upgrade
+
+ㅁ 데몬 (daemon)
+: 사용자가 직접 제어하지 않고, 백그라운드에서 돌면서 여러 작업을 하는 프로그램
+
+- 서비스란(service)
+: 주로 서버/클라이언트 모델에서 출발하여, 사용자의 요청에 응탑한느 프로그램
+(주로 데몬 형태로 구동됨)
+패키지 끝에 d는 deamon을 의미함
+
+예> httpd(dnpqtjqj), ftpd(파일서버), sshd(secure shell), syslogd(시스템 로그)....
+
+- 우분투의 데몬
+-- SystemV 명령어(service) : 실제로 우분투 버전 16/18에서는 service 사용하고 있지 않다.
+   내부적으로는 systemctl로 호출하고 있음
+
+-- systemctl list-units --type=target : 타겟정보
+
+-- systemctl get-default : 현재 런레벨
+
+-- sudo systemctl set-default multi-user.target : 런레벨(타겟레벨) 변경
+
+-- systemctl을 통한 서비스를 확인
+--- systemclt status 서비스명(데몬명) : 데몬 상태 확인
+--- systemctl stop 서비스명 : 서비스 정지
+--- systemctl status 서비스명 : 시작
+--- systemctl restart 서비스명 : 설정을 바꾸거나 문제가 생겼을 때 재시작
+
+--- systemctl enable 서비스명 : 부팅시에 서비스를 시작하고록 한다.
+--- systemctl disable 서비스명 : 부팅시에 서비스를 시작하지 않도록 한다.
+
+--- systemctl cat 서비스명 : 서비스에 대한 정의, 파일내부
+
+
+- journalctl : 데몬 서비스의 로그를 알아보거나 관리 할 때
+
+
+- 데몬 만들기
+-- 데몬스크립트 만들기
+--- sudo vi /usr/local/sbin/my-script.sh
+---- #!/:bin/bash
+---- echo "I'm in $(date +%Y%m%d-%H%M%S)" >> /tmp/mylog.log
+
+-- 서비스 만들기 (Unit, Service, install)
+---  sudo vi /etc/systemd/system/my-startup.service
+---- [Unit]
+---- Description=My startup
+---- [Service]
+---- ExecStart=/usr/local/sbin/my-script.sh
+---- [Install]
+---- WantedBy=multi-user.target
+
+-- 만든 서비스 상태 확인하기
+--- systemctl status my-startup
+
+-- 활성화 시키기(부팅시 시작하겠다는 의미)
+--- sudo systemctl enabel my-startup
+
+-- 수동으로 시작
+--- sudo systemctl start my-startup
+
+-- 상태확인(failed)
+--- systemctl status my-startup
+
+-- failed 원인 알아보기
+--- journalctl -u my-startup
+
+-- 실행권한 설정
+--- sudo chmod +s /usr/local/sbin/my-script.sh
+
+-- 다시 실행하여 상태확인
+--- sudo systemctl start my-startup
+--- systemctl status my-startup
+
+-- 정상 동작했다면 mylog.log 파일 생성 그리고 cat으로 확인
+--- ls -la /tmp/mylog.log
+--- cat /tmp/mylog.log
+
+
+#!/bin/bash
+while true
+do
+        echo "I'm still in $(date +%Y%m%d-%H%M%S)"
+        sleep 10
+done
+~
+
+[Unit]
+Description=My First Daemon
+After=network.target
+
+[Service]
+ExecStart=/usr/local/sbin/my-daemon.sh
+Restart=always
+RestartSec=5
+User=user1
+Group=user1
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+
+
+
+
+
+
+
+
+

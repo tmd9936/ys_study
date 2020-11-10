@@ -7,7 +7,7 @@ str(rawdata)
 analdata <- rawdata
 
 set.seed(2020)
-datatotal <- sort(sample(nrow(analdata), nrow(analdata)* 0,7))
+datatotal <- sort(sample(nrow(analdata), nrow(analdata)*.7))
 train <- rawdata[datatotal,]
 test <- rawdata[-datatotal,]
 
@@ -26,8 +26,8 @@ nbFit
 
 plot(nbFit)
 
-pred_test <- predic(nbFit, newdata = test)
-confusionMatrix(pred_test, test$class)
+pred_test <- predict(nbFit, newdata = test)
+confusionMatrix(pred_test, test$Class)
 
 importance_nb <- varImp(nbFit, scale=F)
 plot(importance_nb)
