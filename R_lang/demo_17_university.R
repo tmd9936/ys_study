@@ -83,6 +83,56 @@ logistic_pred <- predict(logistic_fit, newdata=test)
 # 각 피처에 대한 합격률
 logistic_pred
 
+postResample(pred = logistic_pred, obs = test$Chance.of.Admit)
+
+# 엘라스틱넷
+ctrl <- trainControl(method = "repeatedcv", repeats = 5)
+logit_panal_fit <- train(Chance.of.Admit ~ .,
+                         data = train,
+                         method = "glmnet",
+                         trControl = ctrl,
+                         preProcess = c("center", "scale"),
+                         metric = "RMSE")
+
+logit_panal_fit
+
+plot(logit_panal_fit)
+
+# 예측
+logit_panal_pred <- predict(logit_panal_fit, newdata = test)
+
+# RMSE 값을 계산하는 함수
+postResample(pred = logit_panal_pred, obs=test$Chance.of.Admit)
+
+# 선형 SVM (method = svmLinear)
+logit_panal_fit <- train(Chance.of.Admit ~ .,
+                         data = train,
+                         method = "svmLinear",
+                         trControl = ctrl,
+                         preProcess = c("center", "scale"),
+                         metric = "RMSE")
+# 예측
+logit_panal_pred <- predict(logit_panal_fit, newdata = test)
+
+# RMSE 값을 계산하는 함수
+postResample(pred = logit_panal_pred, obs=test$Chance.of.Admit)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

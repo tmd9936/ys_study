@@ -1,0 +1,22 @@
+sudo apt install mariadb-server
+
+설치확인
+- systemctl status mysql
+
+
+sudo mysql -utest -p
+
+use sample_db
+
+create database test_db;
+
+show databases
+
+유저생성
+- create user 'test2'@'localhost' identified by 'test1234';
+
+스키마 정보
+- desc user
+
+test유저가 smaple_db를 이용 가능하게 함
+- grant all privileges on sample_db.* to 'test'@'localhost';

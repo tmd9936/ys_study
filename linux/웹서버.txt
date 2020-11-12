@@ -65,7 +65,12 @@
 --- ls -la Hello
 
 
+- PAM 모듈을 이용한 접근제어(교재 833)
+: 허용된 사용자만 접근
 
+-- sudo vi /etc/pam.d/vsftpd
+--- sense=allow file=/etc/ftpusers : /etc/ftpusers 파일에 등록된 사용자만 접근
+--- sense=deny file=/etc/ftpusers : /etc/ftpusers 파일에 등록된 사용자만 접근제한(기본값)
 
 
 

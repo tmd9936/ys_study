@@ -69,13 +69,13 @@ plot(importance_logit)
 # 로지스틱 회귀분석에 사용된 패키지
 # 1. Boosted Logistic Regression(method ='LogitBoost')
 # -> 각각의 피처를 돌리고 다른피처 돌리고 더하고 ....
-# -> 가장 간단한 모형으로 시작해서 점차 개전된 모형으로 개선시키는 방식식
+# -> 가장 간단한 모형으로 시작해서 점차 개전된 모형으로 개선시키는 방식
 
 # 2. Logistic Model Trees(method = 'LMT')
 # -> 로지스틱회귀와 의사결정나무를 합친 모형
 
 # 3. penalized Logistic Regression(method = 'plr')
-# -> 정규화(Regularization)를 통해 모텔의 복잡성을 조절하는 방식(L2 정규화)
+# -> 정규화(Regularization)를 통해 모델의 복잡성을 조절하는 방식(L2 정규화)
 # -> 정규화를 하는이유는 오버피팅을 피하기 위함
 # 결과 해석시에 람다의 크기에 따라 베타영역의 크기가 달라짐(람다:λ)
 # λ∑β² < t
