@@ -67,7 +67,7 @@ importance_logit <- varImp(logitFit, scale=F)
 plot(importance_logit)
 
 # 로지스틱 회귀분석에 사용된 패키지
-# 1. Boosted Logistic Regression(method ='LogitBoost')
+# 1. Boosted Logistic Regression(method ='LogitBoost')(앙상블 방법)
 # -> 각각의 피처를 돌리고 다른피처 돌리고 더하고 ....
 # -> 가장 간단한 모형으로 시작해서 점차 개전된 모형으로 개선시키는 방식
 
@@ -90,6 +90,10 @@ plot(importance_logit)
 ## L1 : 베타값을 절대값으로 변환해서 마름모 꼴로 만듦
 ## L2 : 베타값을 제곱함
 
+# L1 L2 정규화 하는 이유
+# -> 베타값의 제한을 둠
+# -> 모델의 복잡성 조정
+# -> 오버핏방지
 
 
 

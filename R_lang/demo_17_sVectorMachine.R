@@ -13,7 +13,7 @@ train <- rawdata[datatotal,]
 test <- rawdata[-datatotal,]
 str(train)
 
-# 섢형 서포트 벡터 머신
+# 선형 서포트 벡터 머신
 ctrl <- trainControl(method = "repeatedcv", repeats = 5)
 svm_linear_fit <- train(Class ~ .,
                         data=train,

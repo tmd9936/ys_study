@@ -1,0 +1,14 @@
+pandas, np, matplotlib
+sklearn(싸이킷 런), seaborn
+
+Latent variable
+차원축소로 중요한변수, 보이지 않는 변수를 추출
+-> pca를 이용
+
+예 ) 카드사용량을 통해 갑자기 급격한 사용량 판단 -> 정답이 없기 때문에 비지도학습 이용
+시계열 -> 주식 예측 분석
+
+고유벡터 eigenVecor
+가장큰 eigenValue(분산)을 갖는 벡터
+
+클러스터링(군집화)
