@@ -109,10 +109,17 @@ library(ggplot2)
 ggplot(data = reduced_data, aes(x=PC1, y =PC2)) + geom_point(aes(color=tar, shape=tar)) + xlab("PC1") + ylab("PC2")+ggtitle("PCA DATA")
 
 
+#########################
+## 3차원
 
+install.packages("scatterplot3d")
 
+library(scatterplot3d)
 
+shapes = c(11,16)
+shapes <- shapes[as.numeric(reduced_data$tar)]
 
+scatterplot3d(reduced_data[,1:3], color=reduced_data[, "tar"], pch=shapes, angle = 45)
 
 
 

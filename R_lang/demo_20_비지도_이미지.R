@@ -14,6 +14,7 @@ r <- dog[,,1]
 g <- dog[,,2]
 b <- dog[,,3]
 
+
 # r,g,b각각 차원축소를 하고 합치기
 dog.r.pca <- prcomp(r, center = F,)
 dog.g.pca <- prcomp(g, center = F,)
