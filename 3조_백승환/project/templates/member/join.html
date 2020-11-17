@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <script>
+                alert("{{messages[-1]}}"); // 리스트의 맨마지막 값이 message
+            </script>
+        {% endif %}
+    {% endwith %}
+    <script>
+
+        // 이메일 유효성 검사를 하는 함수
+        function validateEmail(email) 
+        {
+            let pattern = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    
+            // 입력한 email 문자열을 테스트해서 true 또는 false를 리턴
+            return pattern.test(email);
+    
+        }
+    
+    
+        function join_chk_form() 
+        {
+            let email_val = $.trim($("#email").val());
+
+            if($.trim($("#name").val()) == "")
+            {
+                alert("이름을 입력하세요.");
+                $("#name").focus();
+                return false;
+            }
+
+            if(email_val == "")
+            {
+                alert("이메일을 입력하세요.");
+                $("#email").focus();
+                return false;
+            }
+    
+            if(!validateEmail(email_val))
+            {
+                alert("이메일 형식이 아닙니다. 다시 확인하세요!");
+                $("#email").focus();
+                return false;
+            }
+    
+            if($.trim($("input[name=pw]").val()) == "")
+            {
+                alert("비밀번호를 입력하세요.");
+                $('input[name=pw]').focus();
+                return false;
+            }
+
+            if($.trim($("input[name=pw2]").val()) == "")
+            {
+                alert("비밀번호를 입력하세요.");
+                $('input[name=pw2]').focus();
+                return false;
+            }
+            
+            return ture;
+        }
+    </script>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/join.css')}}">
+
+    <div class="join-box">
+        
+
+        <form class="form-signin" action="{{url_for('member.member_join')}}" method="POST" name="form" onsubmit="return join_chk_form()">
+            <h1 class="h3 mb-3 font-weight-normal text-center">회원가입</h1>
+            <div class="form-group">
+                <label for="name">이름</label>
+                <input class="form-control" type="text" name="name" id="name">
+            </div>
+            <div class="form-group">
+                <label for="email">이메일</label>
+                <input class="form-control" type="email" name="email" id="email">
+            </div>
+            <div class="form-group">
+                <label for="name">비밀번호</label>
+                <input class="form-control" type="password" name="pw" id="pw">
+            </div>
+            <div class="form-group">
+                <label for="name">비밀번호 확인</label>
+                <input class="form-control" type="password" name="pw2" id="pw2">
+            </div>
+
+            <div class="text-center">
+                <input class="btn btn-primary" type="submit" value="회원가입">
+            </div>
+            
+        </form>
+    </div>
+{% endblock content %}

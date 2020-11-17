@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    html {
+        padding: 10px 20px;
+        font-family: sans-serif;
+    }
+    canvas {
+        background: #fff;
+        border: 1px dashed;
+    }
+    a {
+        display: inline-block;
+        background: #69c;
+        color: #fff;
+        padding: 5px 10px;
+    }
+</style>
+
+<script>
+    function init() {
+        var canvas = document.querySelector('canvas'),
+        c = canvas.getContext('2d');
+        c.fillStyle = 'hotpink'; 
+
+        canvas.addEventListener('mousemove', event =>
+            draw(event.offsetX, event.offsetY)
+        );
+        canvas.addEventListener('mousedown', () => isDrawing = true);
+        canvas.addEventListener('mouseup', () => isDrawing = false);
+
+        document.querySelector('a').addEventListener('click', event =>
+            event.target.href = canvas.toDataURL()
+        );
+        
+    }
+
+    function draw(x, y) {
+        if (isDrawing) {
+            c.beginPath();
+            c.arc(x, y, 10, 0, Math.PI*2);
+            c.closePath();
+            c.fill();
+        }
+    }
+
+</script>
+
+<body onload="init()">
+    <p>마우스 드래그로 그림을 그려보세요.
+        <a href="" download="my_painting.png">다운로드</a>
+      </p>
+      
+      <canvas width="300" height="300"></canvas>
+</body>
+</html>

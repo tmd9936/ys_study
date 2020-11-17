@@ -11,12 +11,12 @@ def member_join():
 
         if name == "" or email == "" or pw == "" or pw2 == "":
             flash("값이 입력되지 않았습니다.. 다시 확인하세요!!")
-            return render_template("join.html", title="회원가입")
+            return render_template("member/join.html", title="회원가입")
 
         if pw != pw2:
             flash("비밀번호가 다릅니다.")
 
-            return render_template("join.html", title="회원가입")
+            return render_template("member/join.html", title="회원가입")
 
         
         # members collection 객체를 생성 또는 가져오기
@@ -27,7 +27,7 @@ def member_join():
 
         if cnt > 0:
             flash("이미 가입된 회원입니다.")
-            return render_template("join.html", title="회원가입")
+            return render_template("member/join.html", title="회원가입")
 
 
         # 회원가입 하기
@@ -44,10 +44,10 @@ def member_join():
 
         members.insert_one(post_data)
 
-        return "<h3>회원가입 처리 되었습니다.</h3>"
+        return redirect(url_for('member.member_login', title="로그인"))
         
     else:
-        return render_template("join.html", title="회원가입")
+        return render_template("member/join.html", title="회원가입")
 
 
 @members_blueprint.route('/login', methods=['GET','POST'])
@@ -84,9 +84,9 @@ def member_login():
     else:
         next_url = request.args.get("next_url", type=str)
         if next_url is not None:
-            return render_template("login.html", next_url=next_url, title="로그인")
+            return render_template("member/login.html", next_url=next_url, title="로그인")
         else:
-            return render_template("login.html", title="로그인")   
+            return render_template("member/login.html", title="로그인")   
 
   
 @members_blueprint.route('/logout', methods=['GET'])

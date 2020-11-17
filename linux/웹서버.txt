@@ -1,0 +1,92 @@
+ㅁ 웹서버 구축
+- 웹서버의 선택 : apache, nginx (점유율 비슷함)
+
+- Apache 설치시
+-- Redhat/Fedora(CentOS) 계열에서는 httpd로 설치함.
+
+-- Debian 계열에서는 apache2로 설치
+
+- Nginx 설치시
+-- 모든 배포판에서 nginx로 설치
+
+- 웹 서비스 설치하기
+-- sudo apt install apache2
+- 웹 서비스 기본 설정 보기
+-- /etc/apache2/apache2.conf
+- 웹 서비스 사이트별 설정보기
+-- /etc/apache2/site-available
+-- /etc/apache2/size-enable
+- 웹 서비스 재실행하기
+-- sudo systemctl restart apache2.service
+
+- php 설치 
+-- sudo apt install php7.2-fpm
+
+- ftp 서버
+-- sudo apt install vsftpd -y
+
+-- 설정파일  vi /etc/vsftpd.conf
+
+- fpt 접속하기
+-- ftp 127.0.0.1 또는 ftp localhost
+--- 계정입력 후 비밀번호 입력
+--- ftp > 프롬프트 확인
+--- ftp > dif : ftp 서버안의 파일목록 확인
+--- ftp > quit : 서버 접속 종료
+
+- 윈도우에서 ftp 접속하기 
+-- 포트 포워딩 해준다
+-- 포트 20,21
+--- ftp command 포트번호: 21
+--- ftp data 전송 포트 : 20
+--- 윈도우 prompt에서 접속 확인하기
+
+- 익명 사용자 접속
+-- 보안상 기본족으로 ftp 익명접속을 허용하지 않는다.
+-- 익명사용자 설정이 필요
+--- sudo vi /etc/vsftpd.conf
+---- anonymous_enable = NO => anonymous_enable = YES로 설정
+-- 설정내용 반영
+--- sudo systemctl reload vsftpd
+-- 익명 사용자 접속
+--- 아이디 : anonymous, 비밀번호는 입력 불필요
+
+--  ftp 서버에 파일 넣기
+--- 폴더 cd /srv/ftp
+--- touch Hello
+
+-- 재접속하기
+--- ftp localhost
+--- ftp > dir : 파일 목록확인(Hello)
+--- ftp> get Hello : 접속시 사용자 home 디렉토리로 다운로드됨(Hello 파일)
+--- ftp> quit : 접속 종료
+
+-- 로컬에서 다운받은 Hello 파일 확인하기
+--- ls -la Hello
+
+
+- PAM 모듈을 이용한 접근제어(교재 833)
+: 허용된 사용자만 접근
+
+-- sudo vi /etc/pam.d/vsftpd
+--- sense=allow file=/etc/ftpusers : /etc/ftpusers 파일에 등록된 사용자만 접근
+--- sense=deny file=/etc/ftpusers : /etc/ftpusers 파일에 등록된 사용자만 접근제한(기본값)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

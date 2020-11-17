@@ -1,0 +1,113 @@
+ㅁ 리눅스 쉘(shell)
+: 사용자의 명령어 및 프로그램을 실행할 수 있도록 해주는 사용자 인터페이스
+
+ㅁ 리눅스 쉘의 종류
+- 두 개의 메인타입
+-- Bourne shell : $프롬프트(prompt)
+-- C shell : % 프롬프트
+
+- Bourne Shell의 변천사
+-- Bourne shell -> sh
+-- Korn shell -> ksh
+-- Bourne Again shell -> bash
+-- POSIX shell -> sh
+
+- C shell의 변천사
+-- C shell -> csh
+-- TENEX/TOPS C shell -> tch
+
+ㅁ 프롬프트(prompt)
+: 사용자와 인터랙티브한 입력을 주고 받을 수 있는 명령 대기 표시자
+
+- 우분투의 기본 프롬프트:
+  [username@hostname]:<directory>$
+\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$
+
+
+
+- 환경변수 PS1에 기록됨(PS1 = Prompt Statement One)
+-- \u	: username
+-- \h	: hostname
+-- \w	: current directory
+
+
+ㅁ 리눅스 쉘(shell) - 색상(color)
+- ANSI 표준(American National Standard Institue, 미국 국가표준 협회)
+- ANSI color,참고로 ISO/IEC..)
+
+-- ESC는 고정값 \e
+
+ㅁ echo(출력)
+: 화면에 글자를 출력
+
+ㅁ 리다이렉션 (>, >>, 2>, 2>&)
+: 결과물을 다른 장치로 보냄 ( output, append, error, merge)
+> : 출력장치로 그대로 보냄
+>> : append
+
+
+- 출력장치의 유형
+-- stdout : 표준 출력 : 장치번호1
+-- stderr  : 에러 출력 : 장치번호2
+-- stdin   : 입력 장치 : 장치번호0
+
+- 입력값 리다이렉션(표준입력 - stdin)
+
+cat << end : 표준입력으로 부터 end값이 들어올 때 까지 입력
+
+[문제] 표준 입력으로 부터 end값이 들어올 째까지의 입력결과를 result_new.txt. 파일로 출력하시오
+
+-- cat << end > result_new.txt
+
+ㅁ 파이프 (|)
+: 출력값을 다음 명령어에 넘겨줌
+
+- cat /etc/passwd | more
+: 한번에 다 안보여주고 페이지로 보여줌
+
+- ls -l | wc -l
+: 출력값의 라인수
+
+ㅁ 명령어 history
+: 쉘에서 입력한 명령어들의 기록
+
+- 저장 개수
+-- echo $HISTSIZE
+
+- 최근 10개의 히스토리 보기
+-- history 10
+
+- 히스토리 버퍼 삭제
+--history 10
+
+- 히스토리에t 있는 특정 명령어 실행
+-- !라인번호 
+--- !3 : 3번째 히스토리 명령 수행
+
+- echo $PATH
+-- path 설정 확인
+- PATH=$PATH:/home/user1
+-- 패스 등록
+- 패스 부분 삭제
+-- export PATH:$PATH:./
+
+ㅁ LANG : locale 설정
+: 언어와 언어셋(캐릭터셋), 그리고 다양한 지역 설정 값을 확인(=locale)
+
+ㅁ 단축명령어(alias)
+: 축약어 기능 - 자주 쓰는 긴 명령어를 단축해놓음
+- 축약어 저장하기
+-- echo alias .. = 'cd ..'
+- 로그아웃, 로그인, 접속기 종료후에도 유지하기
+-- /home/user1/.bash_aliases 파일에 저장
+-- echo "alias ..='cd ..'" > .bash_aliases
+-- echo "alias ...='cd ../..'" >> .bash_aliases
+-- cat .bash_aliases (확인하기)
+
+
+while IFS=: read -r F1 F2 F3 F4 F5 F6 F7; do echo "사 용자 $F1는 $F7 쉘을 사용하고 $F6 홈디렉토리를 사용합니다."; done
+
+구분자: 로 읽어서 F1~F7까지 나눔
+
+
+

@@ -1,0 +1,11 @@
+.sub-visual {
+    background-image: url("../images/sub_visual.png");
+    background-size: cover;
+    height: 180px;
+}
+
+.bbs-title {
+    position: relative;
+    top: -130px;
+    color: white;
+}
