@@ -10,7 +10,7 @@
 
 # 명암비(Contrast): 어두운곳과 밝은곳의 밝기 차이
 
-# 히스토그램 스트레칠(Histogram stretching)
+# 히스토그램 스트레칭(Histogram stretching)
 # 영상의 히스토그램이 그레이스케일 전체에 겊쳐 나타나도록 변경하는 선형 변환 기법
 # : 영상의 명암비를 자동으로 조절하는 기법
 # 정규화 함수 : cv2.normalize(src, dst, alpha, beta, norm_type, dtype, mask)
@@ -23,15 +23,29 @@
 import sys, cv2, numpy as np
 import matplotlib.pyplot as plt
 
+# 흑백 영상 히스토 그램
 src = cv2.imread('./images/lenna.bmp', cv2.IMREAD_GRAYSCALE)
+hist = cv2.calcHist([src], [0], None, [256], [0,256])
 
-hist = cv2.calcHist([src], [0], None,[256], [0,256])
+# cv2.imshow('src', src)
+
+# plt.plot(hist)
+# plt.show()
+
+# 컬러 영상 히스토그램
+src = cv2.imread('./images/lenna.bmp')
+
+colors = ['b', 'g', 'r']
+bgr_channels = cv2.split(src)
+
+for (channel, c) in zip(bgr_channels, colors):
+    hist = cv2.calcHist([channel], [0], None, [256], [0, 256])
+    plt.plot(hist, color = c)
 
 cv2.imshow('src', src)
+cv2.waitKey(1)
 
-plt.plot(hist)
 plt.show()
-
 
 cv2.waitKey()
 cv2.destroyAllWindows()

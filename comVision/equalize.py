@@ -7,8 +7,8 @@ src = cv2.imread('./images/snow.png', cv2.IMREAD_GRAYSCALE)
 
 dst = cv2.equalizeHist(src)
 
-# cv2.imshow('src', src)
-# cv2.imshow('dst', dst)
+cv2.imshow('src', src)
+cv2.imshow('dst', dst)
 
 # 컬러영상 히스토그램 평활화
 # BGR을 나눠서 각각 평활화를 -> 각각의 색상 성분이 바뀐상태에서 다시 합치면 전혀 다른 색상이 나올 수 있음

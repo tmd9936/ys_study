@@ -28,7 +28,7 @@ cv2.imshow("b_channel", b_channel)
 cv2.imshow("g_channel", g_channel)
 cv2.imshow("r_channel", r_channel)
 
-cv2.waitKey()
+# cv2.waitKey()
 
 ## 색공간 변환 함수 : cv2.cvtColor(src, code, dst, dstCn) => dst
 # src : 입력영상, code:색 변환코드, dstCn : 결과영상의 채널 수, dst : 출력영상
@@ -44,7 +44,7 @@ src_hsv = cv2.cvtColor(src, cv2.COLOR_BGR2HSV)
 
 channels = cv2.split(src_hsv)
 
-cv2.imshow('src_hsv', src_hsv)
+cv2.imshow('src', src)
 cv2.imshow('channels[0]', channels[0])
 cv2.imshow('channels[1]', channels[1])
 cv2.imshow('channels[2]', channels[2])

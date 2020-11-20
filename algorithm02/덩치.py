@@ -18,7 +18,7 @@ for i in range(n):
     for j in range(n):
         if mans[i][2] < mans[j][2]:
             rank += 1
-    print(rank, end=" ")
-
-
-    
+    if i == n - 1:
+        print(rank, end="")
+    else:
+        print(rank, end=" ")
