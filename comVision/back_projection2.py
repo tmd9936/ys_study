@@ -1,13 +1,14 @@
 import sys, cv2, numpy as np
 
+# 역투영
 # CrCb의 살색 히스트그램을 얻어오기
-#
 
 referenc_img = cv2.imread('./images/son2.png')
 mask = cv2.imread('./images/son2_mask.bmp', cv2.IMREAD_GRAYSCALE)
 
 ref_ycrcb = cv2.cvtColor(referenc_img, cv2.COLOR_BGR2YCrCb)
 
+# CrCb 채널 가져옴
 channels = [1,2]
 ranges = [0, 256, 0, 256]
 hist = cv2.calcHist([ref_ycrcb], channels, mask, [128, 128], ranges)
