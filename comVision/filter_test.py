@@ -29,6 +29,8 @@ def filter_2(img):
     # gray를 blur로 나눠주고 255곱해줌
     dst = cv2.divide(gray, blur, scale=255)
 
+    
+
     return dst
 
 

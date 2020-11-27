@@ -20,7 +20,7 @@ if src is None:
 # 소벨 필터함수
 # cv2.Sobel(src, ddepth, dx, dy, dst=None, ksize=None, scale=None, delta=None, borderType=None)
 # src : 입력영상, depth: 출력영상 데이터차입, -1이면(=입력영상) cv2.CV_32F로 연산하는게 일반적임
-# dx : x방향 미분지순, dy: y방량 미분지수(1차미분 또는 2차미분 지정)
+# dx : x방향 미분지순, dy: y방향 미분지수(1차미분 또는 2차미분 지정)
 # dx=1, dy=0으로 dx=0, dy=1로 설정하는것이 일반적인 방법
 # ksize는 보통 3으로 지정, scale : 연산결과에 추가적으로 곱할 값(기본값:1)
 # delta : 연산결과에 추가적으로 더할 값(기본값: 0)

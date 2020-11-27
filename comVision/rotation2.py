@@ -26,7 +26,7 @@ i = 0
 while True:
     rotation_arr = cv2.getRotationMatrix2D(center_pt, i, 1)
     # border_default : 원래이미지 이용해서 채우기
-    dst = cv2.warpAffine(src, rotation_arr, (0,0), borderValue=(0,255,255))
+    dst = cv2.warpAffine(src, rotation_arr, (0,0), borderValue=255)
     
     cv2.imshow('dst', dst)
 

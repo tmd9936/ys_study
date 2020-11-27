@@ -29,7 +29,7 @@ def on_value_change(pos):
 def change_inRange():
     global lowerb, upperb, hsv_src, min_value
     
-    dst = cv2.inRange(hsv_src, (lowerb, 150, min_value), (upperb, 255, 255))
+    dst = cv2.inRange(hsv_src, (lowerb, 150, 0), (upperb, 255, 255))
 
     cv2.imshow('dst', dst)
 
@@ -50,7 +50,7 @@ cv2.namedWindow('dst')
 
 cv2.createTrackbar('lowerb', 'dst', 0, 255, on_lowerb_change)
 cv2.createTrackbar('upperb', 'dst', 0, 255, on_upperb_change)
-cv2.createTrackbar('min_value', 'dst', 0, 254, on_value_change)
+# cv2.createTrackbar('min_value', 'dst', 0, 254, on_value_change)
 
 # cv2.getTrackbarPos('lowerb','dst')
 
