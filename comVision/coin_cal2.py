@@ -65,7 +65,7 @@ for circle in circles[0,:]:
     mean_of_hue = cv2.mean(hist_shift, mask)[0]
     mean_of_s = cv2.mean(s, mask)[0]  
 
-    print(mean_of_hue)
+    # print(radius)
     # cv2.imshow('crop', crop)
     # cv2.imshow('mask', mask)
     # cv2.waitKey()
@@ -78,7 +78,7 @@ for circle in circles[0,:]:
     elif mean_of_hue < 125 and mean_of_hue > 121:
         won = 0
     else:
-        if radius > 50:
+        if radius > 48:
             won = 500
         elif radius < 43:
             won = 50

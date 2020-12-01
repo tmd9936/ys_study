@@ -22,7 +22,7 @@ for circle in circles[0,:]:
     cx, cy, radius = circle
     cv2.circle(dst, (cx,cy), radius, (0,0,255), 2, cv2.LINE_AA)
 
-    # 동전 영역 분분 영상 추출
+    # 동전 영역 부분 영상 추출
     x1 = int(cx - radius)
     y1 = int(cy - radius)
     x2 = int(cx + radius)
