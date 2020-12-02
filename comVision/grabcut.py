@@ -17,17 +17,27 @@ if src is None:
     print('Image load failed!!')
     sys.exit()
 
+# arr1 = np.zeros((5,5), np.uint8)
+
+# arr2 = np.array([[1,2,3,4,5], [1,2,3,4,5], [1,2,3,4,5], [1,2,3,4,5], [1,2,3,4,5]], np.uint8)
+
+# arr3 = np.where((arr2 == 1) | (arr2 == 2), 0, 1).astype('uint8')
+
+# print(arr3)
 
 rc = cv2.selectROI(src)
 mask = np.zeros(src.shape[:2], np.uint8)
 
 cv2.grabCut(src, mask, rc, None, None, 5, cv2.GC_INIT_WITH_RECT)
 
+
 mask2 = np.where((mask == 0) | (mask == 2), 0, 1).astype('uint8')
 
 dst = src * mask2[:, :, np.newaxis]
 
-cv2.imshow('mask', mask2)
+
+
+cv2.imshow('mask2', mask2)
 cv2.imshow('dst', dst)
 cv2.waitKey()
 

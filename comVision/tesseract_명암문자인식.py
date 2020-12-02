@@ -86,7 +86,7 @@ pers = cv2.getPerspectiveTransform(srcCoord, dstCoord)
 dst = cv2.warpPerspective(src, pers, (dw, dh))
 
 dst_gray = cv2.cvtColor(dst, cv2.COLOR_BGR2GRAY)
-st = pytesseract.image_to_string(dst_gray, lang='Hangul')
+st = pytesseract.image_to_string(dst_gray, lang='Hangul+eng')
 
 print(st)
 
