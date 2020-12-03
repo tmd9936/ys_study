@@ -1,6 +1,8 @@
 # https://github.com/opencv/opencv/tree/master/data/haarcascades
 # 정면얼굴 데이터 : haarcascade_frontalface_alt2.xml
 
+# 얼굴영상 :https://www.pexels.com/search/videos/face
+
 # cv2.CascadeClassifier.detectMultiScale(image, scaleFactor=None, minNeighbors=None, flags=None, minSize=None, maxSize=None, /) 
 # image : 입력 영상
 # scaleFactor: 기본값 1.1(영상 축소 비율), 기본값은 사각형의 크기를 1.1배로 점점 키우면서 검출
@@ -15,7 +17,7 @@ import numpy as np
 import cv2
 
 
-cap = cv2.VideoCapture('./videos/mask_child.mp4')
+cap = cv2.VideoCapture('./videos/face01.mp4')
 
 
 if cap.isOpened() is None:
