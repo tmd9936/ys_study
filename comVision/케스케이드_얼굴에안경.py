@@ -42,7 +42,8 @@ while True:
     faces = faceClassifier.detectMultiScale(frame, scaleFactor=1.3, minSize=(100,100), maxSize=(300,300))
 
     for (x, y, w, h) in faces: 
-        cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 255, 0), 2)
+        # 얼굴검출 확인용 상자
+        # cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 255, 0), 2)
 
         # 검출된 얼굴에서 눈 디텍팅
         # eyes = eyeClassifier.detectMultiScale(frame[y:y+h, x:x+w])
@@ -50,7 +51,7 @@ while True:
         
         # for (x2, y2, w2, h2) in eyes:
         #     cv2.rectangle(frame, (x+x2, y+y2), (x+x2+w2, y+y2+h2), (0,0,255), 2, cv2.LINE_AA)
-
+        samllh = h // 5
         if len(eyes) == 2:
             (x1, y1, w1, h1) = eyes[0]
             (x2, y2, w2, h2) = eyes[1]
@@ -76,17 +77,18 @@ while True:
                 smally = y1
                 bigh = h2
                 samllh = h1
-            
-            rSunglass = cv2.resize(sunglass, (w, h // 2))
 
-            mask = rSunglass[:, :, 3]
-            sg = rSunglass[:, :, :-1]
+        rSunglass = cv2.resize(sunglass, (w-20, h // 2))
 
-            mh, mw = mask.shape[:2]
+        mask = rSunglass[:, :, 3]
+        sg = rSunglass[:, :, :-1]
 
-            crop = frame[samllh+y:samllh+mh+y, x:mw+x]
+        mh, mw = mask.shape[:2]
 
-            crop[mask > 0] = sg[mask > 0]
+        crop = frame[samllh+y:samllh+mh+y, x+10:mw+x+10]
+
+        crop[mask > 0] = sg[mask > 0]
+
 
     cv2.imshow('frame', frame)
 
