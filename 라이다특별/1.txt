@@ -173,6 +173,17 @@ https://releases.ubuntu.com/18.04.5/?_ga=2.139951610.815617854.1607320047-104680
 http://rufus.ie/
 diskmgmt.msc c드라이브에서 20GB정도 볼륨축소
 refus시작, 부트는 다운받은 ubuntu iso파일, usb를 꽂고 usb선택 후 바로 시작버튼 클릭
+컴퓨터 로딩중 F2
+부팅메뉴
+부팅순서를 ubunt가 위로가게 설정
+부팅USB로 부팅 
+----
+설치화면
+ third파티 체크
+ somthig else
+ free space
+ mount point /
+----
 설치 과정
  리눅스 듀얼 부팅으로 설치
  LInux 18.04 설치
