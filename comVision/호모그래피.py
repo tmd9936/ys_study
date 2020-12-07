@@ -33,7 +33,7 @@ matcher = cv2.BFMatcher_create()
 matches = matcher.match(desc1, desc2)
 
 # 좋은 매칭 결과 선별
-matches = sorted(matches, key=lambda x: x.distance)
+matches = sorted(matches, key=lambda x: x.distance) 
 good_matches = matches[:80]
 
 print('# of kp1:', len(kp1))
