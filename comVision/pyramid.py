@@ -1,3 +1,4 @@
+# 이미지 피라미드 : 하나의 영상에 대해 다양한 해상도로 영상을 구성하는 것
 # 영상 다운 샘플링
 # cv2.pyrDown(src, dst, dstsize, borderType)
 # src : 입력영상, dst:출력영상

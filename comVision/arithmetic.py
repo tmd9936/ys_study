@@ -24,11 +24,12 @@ dst4 = cv2.absdiff(src1, src2)
 dst5 = cv2.add(src1, src3)
 dst6 = cv2.subtract(src1, src3)
 
+cv2.imshow('src3', src3)
 
 cv2.imshow('dst1',dst1)
 #cv2.imshow('dst2',dst2)
 #cv2.imshow('dst3',dst3)
-#cv2.imshow('dst4',dst4)
+cv2.imshow('dst4',dst4)
 cv2.imshow('dst5',dst5)
 cv2.imshow('dst6',dst6)
 
